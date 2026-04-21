@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna Belt - The Heat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Franklin:wght@300;400;600&family=Oswald:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --flame-orange: #FF6B35;
+            --amber: #F7931E;
+            --sunset-red: #C1121F;
+            --warm-yellow: #FDB750;
+            --deep-orange: #E85D04;
+            --cream: #FFF8F0;
+            --charcoal: #2B2D42;
+            --burgundy: #780000;
+        }
+
+        body {
+            font-family: 'Libre Franklin', sans-serif;
+            background: var(--charcoal);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* Film Grain Overlay - Just pure grain, no scratches */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="5" numOctaves="12"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23grain)" opacity="0.5"/></svg>');
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.8;
+            mix-blend-mode: overlay;
+        }
+
+        /* Additional Grain Layer */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('film-texture.png');
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.3;
+            mix-blend-mode: screen;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(43,45,66,0.95) 0%, rgba(43,45,66,0) 100%);
+        }
+
+        .logo {
+            font-family: 'Kalam', cursive;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: var(--warm-yellow);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--flame-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, 
+                #1a0a14 0%,
+                #2d1319 10%,
+                #4A1942 20%, 
+                #6b1f3d 30%,
+                #8B1E3F 40%,
+                #a8322f 50%,
+                #C1121F 55%, 
+                #E85D04 65%, 
+                #FF6B35 75%,
+                #F7931E 85%, 
+                #FDB750 95%);
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 10% 15%, rgba(255,200,150,0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 90% 85%, rgba(255,180,120,0.12) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(200,100,180,0.08) 0%, transparent 50%),
+                radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+            pointer-events: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, 
+                rgba(26,10,20,0.6) 0%, 
+                transparent 50%),
+                radial-gradient(circle at 70% 50%, 
+                rgba(107,31,61,0.5) 0%, 
+                transparent 50%),
+                radial-gradient(circle at 50% 80%,
+                rgba(45,19,25,0.7) 0%,
+                transparent 60%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="5" numOctaves="10" /></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.15"/></svg>');
+            animation: pulse 8s ease-in-out infinite;
+            mix-blend-mode: multiply;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--cream);
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.4);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--cream);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1.5s ease-out 0.3s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            animation: fadeInUp 1.5s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 3rem;
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid var(--cream);
+            background: transparent;
+            color: var(--cream);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-family: 'Libre Franklin', sans-serif;
+        }
+
+        .btn:hover {
+            background: var(--cream);
+            color: var(--sunset-red);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary {
+            background: var(--cream);
+            color: var(--sunset-red);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--cream);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            margin-bottom: 3rem;
+            color: var(--warm-yellow);
+            text-align: center;
+        }
+
+        /* Music Section */
+        #music {
+            background: linear-gradient(180deg, var(--charcoal) 0%, #1a1b2e 100%);
+        }
+
+        .featured-release {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .album-artwork {
+            position: relative;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--flame-orange), var(--sunset-red));
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .album-artwork::before {
+            content: '🔥';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15rem;
+            opacity: 0.3;
+            animation: flicker 3s ease-in-out infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        .release-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--warm-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .release-info h3 {
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .release-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--cream);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .streaming-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .streaming-btn {
+            padding: 0.8rem 2rem;
+            background: var(--flame-orange);
+            color: var(--cream);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .streaming-btn:hover {
+            background: var(--warm-yellow);
+            color: var(--charcoal);
+            transform: translateY(-2px);
+        }
+
+        /* Magazine Builder Section */
+        #magazine {
+            background: linear-gradient(180deg, #1a1b2e 0%, var(--charcoal) 100%);
+        }
+
+        .magazine-builder {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .builder-controls {
+            background: rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .control-group {
+            margin-bottom: 2rem;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--warm-yellow);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .font-options, .photo-options, .headline-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: var(--cream);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .option-btn:hover, .option-btn.active {
+            background: var(--flame-orange);
+            border-color: var(--flame-orange);
+            transform: translateY(-2px);
+        }
+
+        .magazine-preview {
+            position: sticky;
+            top: 120px;
+        }
+
+        .magazine-cover {
+            aspect-ratio: 8.5/11;
+            background: var(--cream);
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+
+        .cover-photo {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            filter: contrast(1.1) saturate(1.2);
+        }
+
+        .cover-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .cover-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--warm-yellow);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .cover-subheadline {
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cream);
+        }
+
+        .download-btn {
+            margin-top: 2rem;
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--warm-yellow);
+            color: var(--charcoal);
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--flame-orange);
+            color: var(--cream);
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--charcoal);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: var(--cream);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Tour Section */
+        #tour {
+            background: linear-gradient(180deg, var(--charcoal) 0%, #1a1b2e 100%);
+        }
+
+        .tour-dates {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tour-date {
+            display: grid;
+            grid-template-columns: 150px 1fr 200px;
+            gap: 2rem;
+            align-items: center;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--flame-orange);
+            transition: all 0.3s ease;
+        }
+
+        .tour-date:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+        }
+
+        .tour-date .date {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--warm-yellow);
+            letter-spacing: 0.1em;
+        }
+
+        .tour-date .venue {
+            font-size: 1.2rem;
+            color: var(--cream);
+        }
+
+        .tour-date .location {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        .tour-date .tickets-btn {
+            padding: 0.8rem 2rem;
+            background: var(--flame-orange);
+            color: var(--cream);
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .tour-date .tickets-btn:hover {
+            background: var(--warm-yellow);
+            color: var(--charcoal);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--charcoal);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mailing-list {
+            background: rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .mailing-list h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--warm-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .mailing-list p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .email-form input {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: var(--cream);
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        .email-form input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .email-form button {
+            padding: 1rem 2rem;
+            background: var(--flame-orange);
+            color: var(--cream);
+            border: none;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .email-form button:hover {
+            background: var(--warm-yellow);
+            color: var(--charcoal);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--warm-yellow);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--flame-orange);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1b2e;
+            padding: 3rem;
+            text-align: center;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 5rem;
+            }
+
+            .featured-release,
+            .magazine-builder {
+                grid-template-columns: 1fr;
+            }
+
+            .magazine-preview {
+                position: relative;
+                top: 0;
+            }
+
+            .tour-date {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">ANNA BELT</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html#music">Music</a></li>
+            <li><a href="magazine.html">Magazine</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="tour.html">Tour</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>THE HEAT</h1>
+            <p class="subtitle">New EP — Out Now</p>
+            <div class="cta-buttons">
+                <a href="index.html#music" class="btn btn-primary">Listen Now</a>
+                <a href="magazine.html" class="btn">Create Your Cover</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section id="music">
+        <h2 class="section-title">Featured Release</h2>
+        <div class="featured-release">
+            <div class="album-artwork"></div>
+            <div class="release-info">
+                <h3>Single</h3>
+                <h2>Burning With Desire</h2>
+                <p>From the upcoming EP "The Heat" — A fiery journey through passion, longing, and transformation. Anna Belt's most intimate and powerful work yet.</p>
+                <div class="streaming-links">
+                    <a href="#" class="streaming-btn">Spotify</a>
+                    <a href="#" class="streaming-btn">Apple Music</a>
+                    <a href="#" class="streaming-btn">YouTube</a>
+                    <a href="#" class="streaming-btn">Tidal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Magazine Builder Section -->
+    <section id="magazine">
+        <h2 class="section-title">Design Your 70s Magazine</h2>
+        <div class="magazine-builder">
+            <div class="builder-controls">
+                <div class="control-group">
+                    <label>Choose Font Style</label>
+                    <div class="font-options">
+                        <button class="option-btn active" onclick="changeFont('playfair')">Elegant Serif</button>
+                        <button class="option-btn" onclick="changeFont('impact')">Bold Impact</button>
+                        <button class="option-btn" onclick="changeFont('courier')">Typewriter</button>
+                        <button class="option-btn" onclick="changeFont('times')">Classic Times</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Select Photo</label>
+                    <div class="photo-options">
+                        <button class="option-btn active" onclick="changePhoto('flame')">🔥 Flame</button>
+                        <button class="option-btn" onclick="changePhoto('portrait')">👤 Portrait</button>
+                        <button class="option-btn" onclick="changePhoto('sunset')">🌅 Sunset</button>
+                        <button class="option-btn" onclick="changePhoto('texture')">✨ Texture</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Headline</label>
+                    <div class="headline-options">
+                        <button class="option-btn active" onclick="changeHeadline('heat')">The Heat Is On</button>
+                        <button class="option-btn" onclick="changeHeadline('desire')">Burning With Desire</button>
+                        <button class="option-btn" onclick="changeHeadline('fire')">Playing With Fire</button>
+                        <button class="option-btn" onclick="changeHeadline('soul')">Soul On Fire</button>
+                    </div>
+                </div>
+
+                <button class="download-btn" onclick="downloadCover()">Download Your Cover</button>
+            </div>
+
+            <div class="magazine-preview">
+                <div class="magazine-cover" id="magazineCover">
+                    <div class="cover-photo" id="coverPhoto" style="background: linear-gradient(135deg, var(--flame-orange), var(--sunset-red));"></div>
+                    <div class="cover-text">
+                        <div class="cover-headline" id="coverHeadline">The Heat Is On</div>
+                        <div class="cover-subheadline">Anna Belt • The Heat EP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Anna</h2>
+        <div class="about-content">
+            <p>Anna Belt is a rising artist blending vintage soul with modern fire. Her music draws from the raw emotion of 70s icons while creating something entirely new.</p>
+            <p>With "The Heat," Anna explores themes of desire, transformation, and burning bright in a world that tries to dim your flame.</p>
+            <p>Based in [City], Anna has been captivating audiences with her powerful voice and magnetic stage presence.</p>
+        </div>
+    </section>
+
+    <!-- Tour Section -->
+    <section id="tour">
+        <h2 class="section-title">Tour Dates</h2>
+        <div class="tour-dates">
+            <div class="tour-date">
+                <div class="date">MAY 15</div>
+                <div>
+                    <div class="venue">The Roxy Theatre</div>
+                    <div class="location">Los Angeles, CA</div>
+                </div>
+                <a href="#" class="tickets-btn">Tickets</a>
+            </div>
+            <div class="tour-date">
+                <div class="date">MAY 22</div>
+                <div>
+                    <div class="venue">Brooklyn Steel</div>
+                    <div class="location">Brooklyn, NY</div>
+                </div>
+                <a href="#" class="tickets-btn">Tickets</a>
+            </div>
+            <div class="tour-date">
+                <div class="date">JUN 03</div>
+                <div>
+                    <div class="venue">The Fillmore</div>
+                    <div class="location">San Francisco, CA</div>
+                </div>
+                <a href="#" class="tickets-btn">Tickets</a>
+            </div>
+            <div class="tour-date">
+                <div class="date">JUN 10</div>
+                <div>
+                    <div class="venue">House of Blues</div>
+                    <div class="location">Chicago, IL</div>
+                </div>
+                <a href="#" class="tickets-btn">Tickets</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Stay Connected</h2>
+        <div class="contact-content">
+            <div class="mailing-list">
+                <h3>Join the Mailing List</h3>
+                <p>Get exclusive updates, early access to new music, and special announcements.</p>
+                <form class="email-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <div class="social-links">
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="TikTok">🎵</a>
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="YouTube">▶️</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Anna Belt. All Rights Reserved.</p>
+        <p>Management • Press • Booking</p>
+    </footer>
+
+    <script>
+        // Magazine Builder Functions
+        let currentFont = 'playfair';
+        let currentPhoto = 'flame';
+        let currentHeadline = 'heat';
+
+        function changeFont(font) {
+            currentFont = font;
+            const headline = document.getElementById('coverHeadline');
+            
+            // Remove active class from all font buttons
+            document.querySelectorAll('.font-options .option-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            switch(font) {
+                case 'playfair':
+                    headline.style.fontFamily = "'Playfair Display', serif";
+                    headline.style.fontWeight = '900';
+                    break;
+                case 'impact':
+                    headline.style.fontFamily = "Impact, sans-serif";
+                    headline.style.fontWeight = '900';
+                    break;
+                case 'courier':
+                    headline.style.fontFamily = "'Courier New', monospace";
+                    headline.style.fontWeight = '700';
+                    break;
+                case 'times':
+                    headline.style.fontFamily = "'Times New Roman', serif";
+                    headline.style.fontWeight = '900';
+                    break;
+            }
+        }
+
+        function changePhoto(photo) {
+            currentPhoto = photo;
+            const coverPhoto = document.getElementById('coverPhoto');
+            
+            // Remove active class from all photo buttons
+            document.querySelectorAll('.photo-options .option-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            switch(photo) {
+                case 'flame':
+                    coverPhoto.style.background = 'linear-gradient(135deg, var(--flame-orange), var(--sunset-red))';
+                    break;
+                case 'portrait':
+                    coverPhoto.style.background = 'linear-gradient(135deg, var(--amber), var(--deep-orange))';
+                    break;
+                case 'sunset':
+                    coverPhoto.style.background = 'linear-gradient(180deg, var(--warm-yellow), var(--flame-orange), var(--sunset-red))';
+                    break;
+                case 'texture':
+                    coverPhoto.style.background = 'linear-gradient(45deg, var(--burgundy), var(--flame-orange), var(--warm-yellow))';
+                    break;
+            }
+        }
+
+        function changeHeadline(type) {
+            currentHeadline = type;
+            const headline = document.getElementById('coverHeadline');
+            
+            // Remove active class from all headline buttons
+            document.querySelectorAll('.headline-options .option-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            switch(type) {
+                case 'heat':
+                    headline.textContent = 'The Heat Is On';
+                    break;
+                case 'desire':
+                    headline.textContent = 'Burning With Desire';
+                    break;
+                case 'fire':
+                    headline.textContent = 'Playing With Fire';
+                    break;
+                case 'soul':
+                    headline.textContent = 'Soul On Fire';
+                    break;
+            }
+        }
+
+        function downloadCover() {
+            // In a real implementation, this would use html2canvas or similar
+            alert('In a production version, this would generate and download your custom magazine cover as an image! For now, take a screenshot of your creation.');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Email form submission
+        document.querySelector('.email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thanks for subscribing! You\'ll receive updates about Anna Belt and The Heat EP.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
