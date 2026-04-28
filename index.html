@@ -30,27 +30,15 @@
             --silver: #C0C0C0;
         }
 
-        body {
-            font-family: 'Libre Franklin', sans-serif;
-            background: linear-gradient(135deg, 
-                #1a0a14 0%,
-                #2d1319 8%,
-                #4A1942 16%, 
-                #6b1f3d 24%,
-                #8B1E3F 32%,
-                #a8322f 40%,
-                #C1121F 48%, 
-                #E85D04 56%, 
-                #FF6B35 64%,
-                #F7931E 72%, 
-                #FDB750 80%,
-                #FFD97D 88%,
-                #FFF8F0 96%);
-            min-height: 100vh;
-            color: var(--cream);
-            overflow-x: hidden;
-            position: relative;
-        }
+      body {
+    font-family: 'Libre Franklin', sans-serif;
+    background: url('your-background-image.jpg') center/cover no-repeat fixed;
+    background-color: var(--charcoal); /* fallback */
+    min-height: 100vh;
+    color: var(--cream);
+    overflow-x: hidden;
+    position: relative;
+}
 
         /* Film Grain Overlay */
         body::before {
