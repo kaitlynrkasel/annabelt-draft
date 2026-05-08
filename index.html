@@ -260,7 +260,7 @@
 
 .magazine-page {
     flex: 0 0 auto;
-    height: 70vh;
+    height: 55vh;
     width: auto;
     max-width: 90vw;
     border-radius: 4px;
@@ -500,6 +500,12 @@
             .release-title { font-size: 2.5rem; letter-spacing: 0.15em; }
             .release-banner-placeholder { aspect-ratio: 4/3; }
         }
+        
+        .top-spacer {
+    height: 25vh;
+    position: relative;
+    z-index: 10;
+}
     </style>
 </head>
 <body>
@@ -524,6 +530,8 @@
         </ul>
     </nav>
 
+    <div class="top-spacer"></div>
+    
     <!-- Magazine Section -->
     <section class="magazine-section">
         <div class="magazine-header">
