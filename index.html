@@ -94,6 +94,20 @@
             z-index: 100;
         }
 
+        .header-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8rem;
+    background: linear-gradient(180deg,
+        rgba(15, 8, 3, 0.85) 0%,
+        rgba(15, 8, 3, 0.5) 60%,
+        transparent 100%);
+    z-index: 99;
+    pointer-events: none;
+}
+
         .menu-toggle {
             display: none;
             background: none;
@@ -526,6 +540,9 @@
     </style>
 </head>
 <body>
+
+<div class="header-bg"></div>
+    
     <!-- Logo -->
     <div class="logo">ANNA BELT</div>
 
