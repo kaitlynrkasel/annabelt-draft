@@ -321,6 +321,12 @@
         opacity: 1;
     }
 }
+
+        .section-divider {
+    transition: transform 0.1s linear;
+    transform-origin: center center;
+    will-change: transform;
+}
         
 .section-divider p {
     font-size: 0.85rem;
@@ -668,6 +674,27 @@ if (magazinePages) magazinePages.addEventListener('scroll', updateIssueLabel);
 window.addEventListener('load', updateIssueLabel);
 if (prevBtn) prevBtn.addEventListener('click', () => scrollMagazine(-1));
 if (nextBtn) nextBtn.addEventListener('click', () => scrollMagazine(1));
+
+
+const sectionDivider = document.querySelector('.section-divider');
+
+function updateDividerScale() {
+    if (!sectionDivider) return;
+    const rect = sectionDivider.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // 0 = divider at bottom of viewport (small), 1 = divider at top (big)
+    let progress = 1 - (rect.top / vh);
+    progress = Math.max(0, Math.min(1, progress));
+
+    const scale = 1 + progress * 1.2; // grows from 1x → 2.2x
+    sectionDivider.style.transform = `scale(${scale})`;
+}
+
+document.addEventListener('scroll', updateDividerScale, { passive: true });
+window.addEventListener('resize', updateDividerScale);
+updateDividerScale();
+        
     </script>
 </body>
 </html>
