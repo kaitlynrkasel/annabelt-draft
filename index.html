@@ -205,24 +205,21 @@
         }
 
         /* Since we don't have the actual banner image yet, let's create a styled placeholder */
-      .release-banner-placeholder {
-    width: 100%;
-    max-width: 700px;
-    aspect-ratio: 16/9;
+    .release-banner-placeholder {
+    width: 100vw;
+    margin-left: calc(50% - 50vw); /* break out of the container */
+    aspect-ratio: 21/9;
     background: 
-        linear-gradient(135deg, 
-            rgba(255,107,53,0.35) 0%, 
-            rgba(193,18,31,0.45) 50%, 
+        linear-gradient(180deg, 
+            rgba(0,0,0,0.15) 0%, 
             rgba(0,0,0,0.55) 100%),
         url('theheatbg.jpeg') center/cover no-repeat;
-    border-radius: 8px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    /* drop the border-radius and box-shadow for an edge-to-edge film-still feel */
 }
 
         .release-banner-placeholder:hover {
