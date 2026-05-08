@@ -297,7 +297,6 @@
        .section-divider {
     text-align: center;
     padding: 3rem 2rem 1rem;
-    margin-top: 2rem;
     position: relative;
     z-index: 10;
     margin-top: -1rem;
@@ -686,15 +685,25 @@ const sectionDivider = document.querySelector('.section-divider');
 
 function updateDividerPosition() {
     if (!sectionDivider) return;
-    const rect = sectionDivider.getBoundingClientRect();
+    const magazineSection = document.querySelector('.magazine-section');
+    const banner = document.querySelector('.release-banner-placeholder');
+    if (!magazineSection || !banner) return;
+
+    const magazineRect = magazineSection.getBoundingClientRect();
+    const bannerRect = banner.getBoundingClientRect();
+    const dividerHeight = sectionDivider.offsetHeight;
     const vh = window.innerHeight;
 
-    // 0 = divider just entered viewport, 1 = divider near top
-    let progress = 1 - (rect.top / vh);
+    // The empty space between magazine end and banner start (document-space, fixed)
+    const gapSize = bannerRect.top - magazineRect.bottom;
+
+    // Max distance to slide so divider lands at gap center (never overshoots)
+    const maxOffset = Math.max(0, (gapSize - dividerHeight) / 2);
+
+    // Progress based on how much the magazine has scrolled past
+    let progress = 1 - (magazineRect.bottom / vh);
     progress = Math.max(0, Math.min(1, progress));
 
-    // Slide it down — element keeps original size, just shifts position
-    const maxOffset = vh * 0.35;
     sectionDivider.style.transform = `translateY(${maxOffset * progress}px)`;
 }
 
