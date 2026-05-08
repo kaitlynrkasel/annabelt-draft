@@ -622,50 +622,6 @@ const prevBtn = document.querySelector('.magazine-nav.prev');
 const nextBtn = document.querySelector('.magazine-nav.next');
 const issueLabel = document.getElementById('issueLabel');
 
-// Clone pages for infinite-loop effect
-function setupInfiniteCarousel() {
-    if (!magazinePages) return;
-    const originals = Array.from(magazinePages.querySelectorAll('.magazine-page'));
-    if (originals.length === 0) return;
-
-    // Append two more sets of clones so we have 3 total sets
-    for (let i = 0; i < 2; i++) {
-        originals.forEach(page => {
-            const clone = page.cloneNode(true);
-            clone.setAttribute('aria-hidden', 'true');
-            magazinePages.appendChild(clone);
-        });
-    }
-
-    // Start in the middle set so the user can scroll either direction
-    requestAnimationFrame(() => {
-        const setWidth = magazinePages.scrollWidth / 3;
-        magazinePages.scrollLeft = setWidth;
-    });
-}
-
-let isJumping = false;
-function handleInfiniteScroll() {
-    if (!magazinePages || isJumping) return;
-    const setWidth = magazinePages.scrollWidth / 3;
-    const scroll = magazinePages.scrollLeft;
-
-    // If user reaches the first or third set, silently jump to the equivalent middle position
-    if (scroll < setWidth * 0.5) {
-        isJumping = true;
-        magazinePages.style.scrollBehavior = 'auto';
-        magazinePages.scrollLeft = scroll + setWidth;
-        magazinePages.style.scrollBehavior = '';
-        setTimeout(() => { isJumping = false; }, 50);
-    } else if (scroll > setWidth * 2.5) {
-        isJumping = true;
-        magazinePages.style.scrollBehavior = 'auto';
-        magazinePages.scrollLeft = scroll - setWidth;
-        magazinePages.style.scrollBehavior = '';
-        setTimeout(() => { isJumping = false; }, 50);
-    }
-}
-
 function updateIssueLabel() {
     if (!magazinePages || !issueLabel) return;
     const pages = magazinePages.querySelectorAll('.magazine-page');
@@ -689,22 +645,27 @@ function scrollMagazine(direction) {
     const page = magazinePages.querySelector('.magazine-page');
     if (!page) return;
     const pageWidth = page.offsetWidth + 32;
-    magazinePages.scrollBy({
-        left: direction * pageWidth,
+    const maxScroll = magazinePages.scrollWidth - magazinePages.clientWidth;
+    const currentScroll = magazinePages.scrollLeft;
+
+    let targetScroll = currentScroll + (direction * pageWidth);
+
+    // Loop on button click
+    if (direction > 0 && currentScroll >= maxScroll - 10) {
+        targetScroll = 0;
+    }
+    if (direction < 0 && currentScroll <= 10) {
+        targetScroll = maxScroll;
+    }
+
+    magazinePages.scrollTo({
+        left: targetScroll,
         behavior: 'smooth'
     });
 }
 
-if (magazinePages) {
-    magazinePages.addEventListener('scroll', () => {
-        handleInfiniteScroll();
-        updateIssueLabel();
-    });
-}
-window.addEventListener('load', () => {
-    setupInfiniteCarousel();
-    updateIssueLabel();
-});
+if (magazinePages) magazinePages.addEventListener('scroll', updateIssueLabel);
+window.addEventListener('load', updateIssueLabel);
 if (prevBtn) prevBtn.addEventListener('click', () => scrollMagazine(-1));
 if (nextBtn) nextBtn.addEventListener('click', () => scrollMagazine(1));
     </script>
