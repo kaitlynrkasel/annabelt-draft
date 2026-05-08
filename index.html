@@ -63,10 +63,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-   radial-gradient(ellipse at center, 
-        rgba(40, 15, 5, 0.15) 0%, 
-        rgba(20, 8, 3, 0.5) 100%);
+  background: 
+    radial-gradient(ellipse at center, 
+        rgba(40, 15, 5, 0.05) 0%, 
+        rgba(20, 8, 3, 0.3) 100%);
             pointer-events: none;
             z-index: 1;
         }
@@ -288,6 +288,9 @@
             animation: fadeInUp 1.2s ease-out 0.4s backwards;
             position: relative;
             overflow: hidden;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-button::before {
@@ -431,14 +434,11 @@
             <div class="release-logo">
                 <!-- Placeholder for actual banner image -->
                 <!-- Replace this div with: <img src="the-heat-banner.png" alt="The Heat" class="release-banner"> -->
-                <div class="release-banner-placeholder">
+              <div class="release-banner-placeholder">
     <h1 class="release-title">THE HEAT</h1>
     <p class="release-type">New EP — Out Now</p>
+    <a href="https://linktr.ee/annabelt" class="cta-button" target="_blank">Listen Now</a>
 </div>
-
-            <!-- CTA Button -->
-            <a href="https://linktr.ee/annabelt" class="cta-button" target="_blank">Listen Now</a>
-        </div>
 
 
     </div>
