@@ -13,7 +13,6 @@
         }
 
         :root {
-            /* Fire & Heat Colors */
             --flame-orange: #FF6B35;
             --amber: #F7931E;
             --sunset-red: #C1121F;
@@ -22,37 +21,22 @@
             --cream: #FFF8F0;
             --charcoal: #2B2D42;
             --burgundy: #780000;
-            
-            /* Moonstruck Colors */
             --moonlight: #E8F0F2;
             --midnight-blue: #1B2845;
             --lavender: #B8A9C9;
             --silver: #C0C0C0;
         }
 
-        .banner-bottom {
-    position: absolute;
-    bottom: 15%;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    z-index: 1;
-}
+        body {
+            font-family: 'Libre Franklin', sans-serif;
+            background: url('bgtheheat.jpg') center/cover no-repeat fixed;
+            background-color: var(--charcoal);
+            min-height: 100vh;
+            color: var(--cream);
+            overflow-x: hidden;
+            position: relative;
+        }
 
-      body {
-    font-family: 'Libre Franklin', sans-serif;
-    background: url('bgtheheat.jpg') center/cover no-repeat fixed;
-    background-color: var(--charcoal); /* fallback */
-    min-height: 100vh;
-    color: var(--cream);
-    overflow-x: hidden;
-    position: relative;
-}
-
-        /* Film Grain Overlay */
         body::before {
             content: '';
             position: fixed;
@@ -67,7 +51,6 @@
             mix-blend-mode: soft-light;
         }
 
-        /* Atmospheric Light Overlay */
         body::after {
             content: '';
             position: fixed;
@@ -75,10 +58,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-  background: 
-    radial-gradient(ellipse at center, 
-        rgba(40, 15, 5, 0.05) 0%, 
-        rgba(20, 8, 3, 0.3) 100%);
+            background:
+                radial-gradient(ellipse at center,
+                    rgba(40, 15, 5, 0.05) 0%,
+                    rgba(20, 8, 3, 0.3) 100%);
             pointer-events: none;
             z-index: 1;
         }
@@ -167,6 +150,113 @@
             width: 100%;
         }
 
+        /* ===== Magazine Section ===== */
+        .magazine-section {
+            min-height: 100vh;
+            padding: 8rem 0 6rem;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .magazine-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+
+        .magazine-issue {
+            font-size: 0.85rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--warm-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .magazine-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: var(--cream);
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .magazine-subtitle {
+            font-style: italic;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+
+        .magazine-pages {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2rem 10vw 3rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 248, 240, 0.3) transparent;
+        }
+
+        .magazine-pages::-webkit-scrollbar {
+            height: 8px;
+        }
+        .magazine-pages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .magazine-pages::-webkit-scrollbar-thumb {
+            background: rgba(255, 248, 240, 0.3);
+            border-radius: 4px;
+        }
+
+        .magazine-page {
+            flex: 0 0 auto;
+            width: min(800px, 85vw);
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            scroll-snap-align: center;
+            display: block;
+        }
+
+        .magazine-page:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+        }
+
+        .scroll-hint-text {
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--cream);
+            opacity: 0.5;
+            margin-top: 1rem;
+        }
+
+        /* Divider between magazine + heat */
+        .section-divider {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-divider p {
+            font-size: 0.85rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--warm-yellow);
+            opacity: 0.8;
+        }
+
         /* Main Container */
         .container {
             min-height: 100vh;
@@ -179,7 +269,6 @@
             z-index: 10;
         }
 
-        /* Release Section */
         .release-hero {
             text-align: center;
             max-width: 900px;
@@ -197,7 +286,6 @@
             }
         }
 
-        /* Release Logo/Banner */
         .release-logo {
             margin-bottom: 3rem;
             position: relative;
@@ -216,45 +304,38 @@
             transform: scale(1.02);
         }
 
-        /* Since we don't have the actual banner image yet, let's create a styled placeholder */
-    .release-banner-placeholder {
-    width: 100vw;
-    margin-left: calc(50% - 50vw); /* break out of the container */
-    aspect-ratio: 21/9;
- background: 
-    linear-gradient(180deg, 
-        rgba(0,0,0,0.05) 0%, 
-        rgba(0,0,0,0.25) 100%),
-    url('theheatbg.jpeg') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-        mask-image: linear-gradient(to bottom, 
-    transparent 0%, 
-    black 5%, 
-    black 95%, 
-    transparent 100%);
--webkit-mask-image: linear-gradient(to bottom, 
-    transparent 0%, 
-    black 5%, 
-    black 95%, 
-    transparent 100%);
-    filter: contrast(1.05) brightness(1.25);
-    mix-blend-mode: luminosity;
-    flex-direction: column;
-    /* drop the border-radius and box-shadow for an edge-to-edge film-still feel */
-}
+        .release-banner-placeholder {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            aspect-ratio: 21/9;
+            background:
+                linear-gradient(180deg,
+                    rgba(0,0,0,0.05) 0%,
+                    rgba(0,0,0,0.25) 100%),
+                url('theheatbg.jpeg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            mask-image: linear-gradient(to bottom,
+                transparent 0%,
+                black 5%,
+                black 95%,
+                transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom,
+                transparent 0%,
+                black 5%,
+                black 95%,
+                transparent 100%);
+            filter: contrast(1.05) brightness(1.25);
+            mix-blend-mode: luminosity;
+            transition: filter 0.3s ease;
+        }
 
-   .release-banner-placeholder:hover {
-   filter: contrast(1.1) brightness(1.35);
-}
-
-.release-banner-placeholder:hover {
-    filter: sepia(0.35) saturate(1.3) hue-rotate(-10deg) brightness(1.1);
-}
-
+        .release-banner-placeholder:hover {
+            filter: contrast(1.1) brightness(1.35);
+        }
 
         .release-title {
             font-family: 'Cormorant Garamond', serif;
@@ -267,20 +348,28 @@
             z-index: 1;
         }
 
-        /* Release Type Label */
-       .release-type {
-    font-size: 1.2rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--warm-yellow);
-    font-weight: 300;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-    position: relative;
-    z-index: 1;
-    animation: fadeInUp 1.2s ease-out 0.2s backwards;
-}
+        .banner-bottom {
+            position: absolute;
+            bottom: 15%;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1;
+        }
 
-        /* CTA Button */
+        .release-type {
+            font-size: 1.2rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--warm-yellow);
+            font-weight: 300;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+            animation: fadeInUp 1.2s ease-out 0.2s backwards;
+        }
+
         .cta-button {
             display: inline-block;
             padding: 1.2rem 4rem;
@@ -298,8 +387,6 @@
             animation: fadeInUp 1.2s ease-out 0.4s backwards;
             position: relative;
             overflow: hidden;
-            position: relative;
-            z-index: 1;
         }
 
         .cta-button::before {
@@ -327,43 +414,18 @@
             color: var(--charcoal);
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 1024px) {
-            .logo {
-                top: 2rem;
-                left: 2rem;
-                font-size: 1.6rem;
-            }
-
-            nav {
-                top: 2rem;
-                right: 2rem;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .release-title {
-                font-size: 5rem;
-            }
+            .logo { top: 2rem; left: 2rem; font-size: 1.6rem; }
+            nav { top: 2rem; right: 2rem; }
+            .nav-links { gap: 1.5rem; }
+            .release-title { font-size: 5rem; }
         }
 
         @media (max-width: 768px) {
-            .logo {
-                font-size: 1.4rem;
-                top: 1.5rem;
-                left: 1.5rem;
-            }
-
-            nav {
-                top: 1.5rem;
-                right: 1.5rem;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
+            .logo { font-size: 1.4rem; top: 1.5rem; left: 1.5rem; }
+            nav { top: 1.5rem; right: 1.5rem; }
+            .menu-toggle { display: block; }
 
             .nav-links {
                 position: fixed;
@@ -380,37 +442,19 @@
                 box-shadow: -5px 0 20px rgba(0,0,0,0.5);
             }
 
-            .nav-links.active {
-                right: 0;
-            }
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1rem; }
+            .release-title { font-size: 3.5rem; }
+            .release-type { font-size: 1rem; }
+            .cta-button { padding: 1rem 2.5rem; font-size: 0.9rem; }
 
-            .nav-links a {
-                font-size: 1rem;
-            }
-
-            .release-title {
-                font-size: 3.5rem;
-            }
-
-            .release-type {
-                font-size: 1rem;
-            }
-
-            .cta-button {
-                padding: 1rem 2.5rem;
-                font-size: 0.9rem;
-            }
+            .magazine-pages { padding: 1rem 5vw 2rem; }
+            .magazine-page { width: 90vw; }
         }
 
         @media (max-width: 480px) {
-            .release-title {
-                font-size: 2.5rem;
-                letter-spacing: 0.15em;
-            }
-
-            .release-banner-placeholder {
-                aspect-ratio: 4/3;
-            }
+            .release-title { font-size: 2.5rem; letter-spacing: 0.15em; }
+            .release-banner-placeholder { aspect-ratio: 4/3; }
         }
     </style>
 </head>
@@ -436,26 +480,43 @@
         </ul>
     </nav>
 
-    <!-- Main Container -->
+    <!-- Magazine Section -->
+    <section class="magazine-section">
+        <div class="magazine-header">
+            <p class="magazine-issue">Issue 01 · May 2026</p>
+            <h2 class="magazine-title">Anna on the Page</h2>
+            <p class="magazine-subtitle">A monthly zine</p>
+        </div>
+
+        <div class="magazine-pages">
+            <img src="zine1.png" alt="Anna on the Page — page 1" class="magazine-page">
+            <img src="zine2.png" alt="Anna on the Page — page 2" class="magazine-page">
+        </div>
+
+        <p class="scroll-hint-text">← Swipe to flip pages →</p>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider">
+        <p>Now Releasing ↓</p>
+    </div>
+
+    <!-- The Heat Banner -->
     <div class="container">
         <div class="release-hero">
-            <!-- Release Logo/Banner -->
             <div class="release-logo">
-                <!-- Placeholder for actual banner image -->
-                <!-- Replace this div with: <img src="the-heat-banner.png" alt="The Heat" class="release-banner"> -->
-             <div class="release-banner-placeholder">
-    <h1 class="release-title">THE HEAT</h1>
-    <div class="banner-bottom">
-        <p class="release-type">New EP — Out Now</p>
-        <a href="https://linktr.ee/annabelt" class="cta-button" target="_blank">Listen Now</a>
-    </div>
-</div>
-
-
+                <div class="release-banner-placeholder">
+                    <h1 class="release-title">THE HEAT</h1>
+                    <div class="banner-bottom">
+                        <p class="release-type">New EP — Out Now</p>
+                        <a href="https://linktr.ee/annabelt" class="cta-button" target="_blank">Listen Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
@@ -463,30 +524,24 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
             });
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('nav')) {
                 navLinks.classList.remove('active');
             }
         });
 
-        // Smooth scroll behavior
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
