@@ -296,12 +296,32 @@
         /* Divider between magazine + heat */
        .section-divider {
     text-align: center;
-    padding: 1rem 2rem 0.5rem;
+    padding: 3rem 2rem 1rem;
+    margin-top: 2rem;
     position: relative;
     z-index: 10;
     margin-top: -1rem;
 }
 
+.scroll-arrow {
+    font-size: 2rem;
+    color: var(--warm-yellow);
+    margin-top: 0.5rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(8px);
+        opacity: 1;
+    }
+}
+        
 .section-divider p {
     font-size: 0.85rem;
     letter-spacing: 0.4em;
@@ -548,7 +568,8 @@
 
     <!-- Divider -->
     <div class="section-divider">
-        <p>Now Releasing ↓</p>
+        <p>Now Releasing</p>
+<div class="scroll-arrow">↓</div>
     </div>
 
     <!-- The Heat Banner -->
