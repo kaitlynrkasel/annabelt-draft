@@ -683,18 +683,25 @@ if (nextBtn) nextBtn.addEventListener('click', () => scrollMagazine(1));
 
 const sectionDivider = document.querySelector('.section-divider');
 
-function updateDividerScale() {
+const sectionDivider = document.querySelector('.section-divider');
+
+function updateDividerPosition() {
     if (!sectionDivider) return;
     const rect = sectionDivider.getBoundingClientRect();
     const vh = window.innerHeight;
 
-    // 0 = divider at bottom of viewport (small), 1 = divider at top (big)
+    // 0 = divider just entered viewport, 1 = divider near top
     let progress = 1 - (rect.top / vh);
     progress = Math.max(0, Math.min(1, progress));
 
-    const scale = 1 + progress * 1.2; // grows from 1x → 2.2x
-    sectionDivider.style.transform = `scale(${scale})`;
+    // Slide it down — element keeps original size, just shifts position
+    const maxOffset = vh * 0.35;
+    sectionDivider.style.transform = `translateY(${maxOffset * progress}px)`;
 }
+
+document.addEventListener('scroll', updateDividerPosition, { passive: true });
+window.addEventListener('resize', updateDividerPosition);
+updateDividerPosition();
 
 document.addEventListener('scroll', updateDividerScale, { passive: true });
 window.addEventListener('resize', updateDividerScale);
