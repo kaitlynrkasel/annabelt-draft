@@ -231,6 +231,7 @@
     transparent 100%);
     filter: contrast(1.05) brightness(1.25);
     mix-blend-mode: luminosity;
+    flex-direction: column;
     /* drop the border-radius and box-shadow for an edge-to-edge film-still feel */
 }
 
@@ -255,16 +256,19 @@
         }
 
         /* Release Type Label */
-        .release-type {
-            font-size: 1.2rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--warm-yellow);
-            font-weight: 300;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-            animation: fadeInUp 1.2s ease-out 0.2s backwards;
-        }
+       .release-type {
+    font-size: 1.2rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--warm-yellow);
+    font-weight: 300;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1.2s ease-out 0.2s backwards;
+}
 
         /* CTA Button */
         .cta-button {
