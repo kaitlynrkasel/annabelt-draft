@@ -222,16 +222,10 @@
     /* drop the border-radius and box-shadow for an edge-to-edge film-still feel */
 }
 
-        .release-banner-placeholder:hover {
-            transform: scale(1.02);
-        }
+   .release-banner-placeholder:hover {
+    filter: brightness(1.1) saturate(1.15);
+}
 
-        .release-banner-placeholder::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.2) 0%, transparent 60%);
-        }
 
         .release-title {
             font-family: 'Cormorant Garamond', serif;
