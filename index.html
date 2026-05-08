@@ -648,21 +648,26 @@ function updateIssueLabel() {
 
 function scrollMagazine(direction) {
     if (!magazinePages) return;
-    const page = magazinePages.querySelector('.magazine-page');
-    if (!page) return;
-    const pageWidth = page.offsetWidth + 32;
-    const maxScroll = magazinePages.scrollWidth - magazinePages.clientWidth;
-    const currentScroll = magazinePages.scrollLeft;
+    const pages = Array.from(magazinePages.querySelectorAll('.magazine-page'));
+    if (pages.length === 0) return;
 
-    let targetScroll = currentScroll + (direction * pageWidth);
+    // Find which page is currently most centered
+    const viewportCenter = magazinePages.scrollLeft + magazinePages.clientWidth / 2;
+    let currentIndex = 0;
+    let minDist = Infinity;
+    pages.forEach((p, i) => {
+        const pageCenter = p.offsetLeft + p.offsetWidth / 2;
+        const dist = Math.abs(pageCenter - viewportCenter);
+        if (dist < minDist) { minDist = dist; currentIndex = i; }
+    });
 
-    // Loop on button click
-    if (direction > 0 && currentScroll >= maxScroll - 10) {
-        targetScroll = 0;
-    }
-    if (direction < 0 && currentScroll <= 10) {
-        targetScroll = maxScroll;
-    }
+    // Move to next/prev with wrap
+    let nextIndex = currentIndex + direction;
+    if (nextIndex < 0) nextIndex = pages.length - 1;
+    if (nextIndex >= pages.length) nextIndex = 0;
+
+    const target = pages[nextIndex];
+    const targetScroll = target.offsetLeft - (magazinePages.clientWidth - target.offsetWidth) / 2;
 
     magazinePages.scrollTo({
         left: targetScroll,
