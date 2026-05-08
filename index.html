@@ -501,8 +501,8 @@
             .release-banner-placeholder { aspect-ratio: 4/3; }
         }
         
-        .top-spacer {
-    height: 25vh;
+     .top-spacer {
+    height: 7rem;
     position: relative;
     z-index: 10;
 }
@@ -600,16 +600,30 @@
             });
         });
 
-        const magazinePages = document.querySelector('.magazine-pages');
+   const magazinePages = document.querySelector('.magazine-pages');
 const prevBtn = document.querySelector('.magazine-nav.prev');
 const nextBtn = document.querySelector('.magazine-nav.next');
 
 function scrollMagazine(direction) {
     const page = magazinePages.querySelector('.magazine-page');
     if (!page) return;
-    const scrollAmount = page.offsetWidth + 32;
-    magazinePages.scrollBy({
-        left: direction * scrollAmount,
+    const pageWidth = page.offsetWidth + 32;
+    const maxScroll = magazinePages.scrollWidth - magazinePages.clientWidth;
+    const currentScroll = magazinePages.scrollLeft;
+
+    let targetScroll = currentScroll + (direction * pageWidth);
+
+    // Loop to start if going past the end
+    if (direction > 0 && currentScroll >= maxScroll - 10) {
+        targetScroll = 0;
+    }
+    // Loop to end if going past the start
+    if (direction < 0 && currentScroll <= 10) {
+        targetScroll = maxScroll;
+    }
+
+    magazinePages.scrollTo({
+        left: targetScroll,
         behavior: 'smooth'
     });
 }
