@@ -209,11 +209,11 @@
     width: 100vw;
     margin-left: calc(50% - 50vw); /* break out of the container */
     aspect-ratio: 21/9;
-    background: 
-        linear-gradient(180deg, 
-            rgba(0,0,0,0.15) 0%, 
-            rgba(0,0,0,0.55) 100%),
-        url('theheatbg.jpeg') center/cover no-repeat;
+ background: 
+    linear-gradient(180deg, 
+        rgba(0,0,0,0.05) 0%, 
+        rgba(0,0,0,0.25) 100%),
+    url('theheatbg.jpeg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -229,13 +229,13 @@
     black 5%, 
     black 95%, 
     transparent 100%);
-    filter: contrast(1.05);
+    filter: contrast(1.05) brightness(1.25);
     mix-blend-mode: luminosity;
     /* drop the border-radius and box-shadow for an edge-to-edge film-still feel */
 }
 
    .release-banner-placeholder:hover {
-   filter: contrast(1.1) brightness(1.1);
+   filter: contrast(1.1) brightness(1.35);
 }
 
 .release-banner-placeholder:hover {
