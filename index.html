@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,74 +151,36 @@
             width: 100%;
         }
 
+        /* Top Spacer */
+        .top-spacer {
+            height: 7rem;
+            position: relative;
+            z-index: 10;
+        }
+
         /* ===== Magazine Section ===== */
-
-    .magazine-nav {
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    background: rgba(255, 248, 240, 0.15);
-    border: 1px solid rgba(255, 248, 240, 0.3);
-    color: var(--cream);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.4rem;
-    font-family: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 11;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.magazine-nav:hover {
-    background: rgba(255, 248, 240, 0.3);
-    transform: translateY(-50%) scale(1.1);
-    border-color: var(--warm-yellow);
-    color: var(--warm-yellow);
-}
-
-.magazine-nav.prev { left: 2rem; }
-.magazine-nav.next { right: 2rem; }
-
-@media (max-width: 768px) {
-    .magazine-nav { display: none; }
-}
-        
-     .magazine-section {
-    min-height: 100vh;
-    padding: 5rem 0 4rem;
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(180deg,
-        rgba(15, 8, 3, 0.85) 0%,
-        rgba(30, 15, 5, 0.92) 50%,
-        rgba(15, 8, 3, 0.85) 100%);
-    box-shadow:
-        inset 0 30px 60px rgba(0,0,0,0.4),
-        inset 0 -30px 60px rgba(0,0,0,0.4);
-}
+        .magazine-section {
+            min-height: 100vh;
+            padding: 5rem 0 4rem;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg,
+                rgba(15, 8, 3, 0.85) 0%,
+                rgba(30, 15, 5, 0.92) 50%,
+                rgba(15, 8, 3, 0.85) 100%);
+            box-shadow:
+                inset 0 30px 60px rgba(0,0,0,0.4),
+                inset 0 -30px 60px rgba(0,0,0,0.4);
+        }
 
         .magazine-header {
             text-align: center;
             margin-bottom: 3rem;
             padding: 0 2rem;
-        }
-
-        .magazine-issue {
-            font-size: 0.85rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--warm-yellow);
-            margin-bottom: 1rem;
         }
 
         .magazine-title {
@@ -236,44 +199,88 @@
             opacity: 0.7;
         }
 
-     .magazine-pages {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 2rem max(2rem, calc(50vw - 350px)) 3rem;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 248, 240, 0.3) transparent;
-}
+        .issue-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--warm-yellow);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.3s ease;
+            position: relative;
+            z-index: 11;
+        }
 
-  .magazine-pages::-webkit-scrollbar {
-    height: 8px;
-}
-.magazine-pages::-webkit-scrollbar-track {
-    background: transparent;
-}
-.magazine-pages::-webkit-scrollbar-thumb {
-    background: rgba(255, 248, 240, 0.3);
-    border-radius: 4px;
-}
+        .magazine-pages {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2rem max(2rem, calc(50vw - 350px)) 3rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 248, 240, 0.3) transparent;
+        }
 
-.magazine-page {
-    flex: 0 0 auto;
-    height: 55vh;
-    width: auto;
-    max-width: 90vw;
-    border-radius: 4px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    scroll-snap-align: center;
-    display: block;
-}
+        .magazine-pages::-webkit-scrollbar {
+            height: 8px;
+        }
+        .magazine-pages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .magazine-pages::-webkit-scrollbar-thumb {
+            background: rgba(255, 248, 240, 0.3);
+            border-radius: 4px;
+        }
 
-.magazine-page:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
-}
+        .magazine-page {
+            flex: 0 0 auto;
+            height: 55vh;
+            width: auto;
+            max-width: 90vw;
+            border-radius: 4px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            scroll-snap-align: center;
+            display: block;
+        }
+
+        .magazine-page:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+        }
+
+        .magazine-nav {
+            position: absolute;
+            top: 60%;
+            transform: translateY(-50%);
+            background: rgba(255, 248, 240, 0.15);
+            border: 1px solid rgba(255, 248, 240, 0.3);
+            color: var(--cream);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 11;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .magazine-nav:hover {
+            background: rgba(255, 248, 240, 0.3);
+            transform: translateY(-50%) scale(1.1);
+            border-color: var(--warm-yellow);
+            color: var(--warm-yellow);
+        }
+
+        .magazine-nav.prev { left: 2rem; }
+        .magazine-nav.next { right: 2rem; }
 
         .scroll-hint-text {
             text-align: center;
@@ -333,19 +340,6 @@
         .release-logo {
             margin-bottom: 3rem;
             position: relative;
-        }
-
-        .release-banner {
-            width: 100%;
-            max-width: 700px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-            transition: transform 0.3s ease;
-        }
-
-        .release-banner:hover {
-            transform: scale(1.02);
         }
 
         .release-banner-placeholder {
@@ -494,18 +488,13 @@
 
             .magazine-pages { padding: 1rem 5vw 2rem; }
             .magazine-page { width: 90vw; }
+            .magazine-nav { display: none; }
         }
 
         @media (max-width: 480px) {
             .release-title { font-size: 2.5rem; letter-spacing: 0.15em; }
             .release-banner-placeholder { aspect-ratio: 4/3; }
         }
-        
-     .top-spacer {
-    height: 7rem;
-    position: relative;
-    z-index: 10;
-}
     </style>
 </head>
 <body>
@@ -531,23 +520,27 @@
     </nav>
 
     <div class="top-spacer"></div>
-    
+
     <!-- Magazine Section -->
     <section class="magazine-section">
         <div class="magazine-header">
-            <p class="magazine-issue">Issue 01 · May 2026</p>
             <h2 class="magazine-title">Anna on the Page</h2>
             <p class="magazine-subtitle">A monthly zine</p>
         </div>
 
+        <p class="issue-label" id="issueLabel">Issue 01 · May 2026</p>
+
         <div class="magazine-pages">
-            <img src="zine1.png" alt="Anna on the Page — page 1" class="magazine-page">
-            <img src="zine2.png" alt="Anna on the Page — page 2" class="magazine-page" loading="lazy">
+            <img src="zine1.png" alt="Anna on the Page — page 1" class="magazine-page"
+                 data-issue="Issue 01 · May 2026">
+            <img src="zine2.png" alt="Anna on the Page — page 2" class="magazine-page" loading="lazy"
+                 data-issue="Issue 01 · May 2026">
         </div>
 
         <p class="scroll-hint-text">← Swipe to flip pages →</p>
+
         <button class="magazine-nav prev" aria-label="Previous page">←</button>
-<button class="magazine-nav next" aria-label="Next page">→</button>
+        <button class="magazine-nav next" aria-label="Next page">→</button>
     </section>
 
     <!-- Divider -->
@@ -600,36 +593,57 @@
             });
         });
 
-   const magazinePages = document.querySelector('.magazine-pages');
-const prevBtn = document.querySelector('.magazine-nav.prev');
-const nextBtn = document.querySelector('.magazine-nav.next');
+        const magazinePages = document.querySelector('.magazine-pages');
+        const prevBtn = document.querySelector('.magazine-nav.prev');
+        const nextBtn = document.querySelector('.magazine-nav.next');
+        const issueLabel = document.getElementById('issueLabel');
 
-function scrollMagazine(direction) {
-    const page = magazinePages.querySelector('.magazine-page');
-    if (!page) return;
-    const pageWidth = page.offsetWidth + 32;
-    const maxScroll = magazinePages.scrollWidth - magazinePages.clientWidth;
-    const currentScroll = magazinePages.scrollLeft;
+        function updateIssueLabel() {
+            if (!magazinePages || !issueLabel) return;
+            const pages = magazinePages.querySelectorAll('.magazine-page');
+            const center = magazinePages.scrollLeft + magazinePages.clientWidth / 2;
+            let closest = null;
+            let minDist = Infinity;
 
-    let targetScroll = currentScroll + (direction * pageWidth);
+            pages.forEach(p => {
+                const pageCenter = p.offsetLeft + p.offsetWidth / 2;
+                const dist = Math.abs(pageCenter - center);
+                if (dist < minDist) { minDist = dist; closest = p; }
+            });
 
-    // Loop to start if going past the end
-    if (direction > 0 && currentScroll >= maxScroll - 10) {
-        targetScroll = 0;
-    }
-    // Loop to end if going past the start
-    if (direction < 0 && currentScroll <= 10) {
-        targetScroll = maxScroll;
-    }
+            if (closest && closest.dataset.issue) {
+                issueLabel.textContent = closest.dataset.issue;
+            }
+        }
 
-    magazinePages.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-    });
-}
+        function scrollMagazine(direction) {
+            if (!magazinePages) return;
+            const page = magazinePages.querySelector('.magazine-page');
+            if (!page) return;
+            const pageWidth = page.offsetWidth + 32;
+            const maxScroll = magazinePages.scrollWidth - magazinePages.clientWidth;
+            const currentScroll = magazinePages.scrollLeft;
 
-if (prevBtn) prevBtn.addEventListener('click', () => scrollMagazine(-1));
-if (nextBtn) nextBtn.addEventListener('click', () => scrollMagazine(1));
+            let targetScroll = currentScroll + (direction * pageWidth);
+
+            if (direction > 0 && currentScroll >= maxScroll - 10) {
+                targetScroll = 0;
+            }
+            if (direction < 0 && currentScroll <= 10) {
+                targetScroll = maxScroll;
+            }
+
+            magazinePages.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+        }
+
+        if (magazinePages) magazinePages.addEventListener('scroll', updateIssueLabel);
+        window.addEventListener('load', updateIssueLabel);
+        if (prevBtn) prevBtn.addEventListener('click', () => scrollMagazine(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => scrollMagazine(1));
     </script>
 </body>
 </html>
+```
