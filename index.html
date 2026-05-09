@@ -756,8 +756,10 @@ function updateHeader() {
 document.addEventListener('scroll', updateHeader, { passive: true });
 updateHeader();
 
-document.addEventListener('scroll', updateHeaderBg, { passive: true });
-updateHeaderBg();
+document.addEventListener('scroll', updateDividerPosition, { passive: true });
+window.addEventListener('resize', updateDividerPosition);
+window.addEventListener('load', updateDividerPosition);
+updateDividerPosition();
 
         
     </script>
