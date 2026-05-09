@@ -90,7 +90,7 @@
         /* Logo */
         .logo {
             position: fixed;
-            top: 2.5rem;
+            top: 3rem;
             left: 3rem;
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
@@ -115,6 +115,32 @@
             z-index: 100;
         }
 
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 3rem;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition: background 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+}
+
+.site-header.scrolled {
+    background: rgba(15, 8, 3, 0.75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+        
         .menu-toggle {
             display: none;
             background: none;
@@ -546,9 +572,9 @@
     <div class="header-bg"></div>
 
     <!-- Logo -->
+<header class="site-header">
     <div class="logo">ANNA BELT</div>
 
-    <!-- Navigation -->
     <nav>
         <button class="menu-toggle" aria-label="Toggle menu">
             <span></span>
@@ -565,6 +591,7 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
+</header>
 
     <div class="top-spacer"></div>
 
@@ -725,16 +752,19 @@
         window.addEventListener('resize', updateDividerPosition);
         updateDividerPosition();
 
-const headerBg = document.querySelector('.header-bg');
+const siteHeader = document.querySelector('.site-header');
 
-function updateHeaderBg() {
-    if (!headerBg) return;
+function updateHeader() {
+    if (!siteHeader) return;
     if (window.scrollY > 50) {
-        headerBg.classList.add('visible');
+        siteHeader.classList.add('scrolled');
     } else {
-        headerBg.classList.remove('visible');
+        siteHeader.classList.remove('scrolled');
     }
 }
+
+document.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
 
 document.addEventListener('scroll', updateHeaderBg, { passive: true });
 updateHeaderBg();
