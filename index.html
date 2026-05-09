@@ -713,8 +713,7 @@
             let progress = 1 - (bannerRect.bottom / vh);
             progress = Math.max(0, Math.min(1, progress));
 
-            sectionDivider.style.transform = `translateY(${maxOffset * progress}px)`;
-        }
+           sectionDivider.style.transform = `translateY(${-maxOffset * progress}px)`;
 
         document.addEventListener('scroll', updateDividerPosition, { passive: true });
         window.addEventListener('resize', updateDividerPosition);
