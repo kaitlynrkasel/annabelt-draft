@@ -725,41 +725,31 @@
 
         const sectionDivider = document.querySelector('.section-divider');
 
-        function updateDividerPosition() {
-            if (!sectionDivider) return;
-            const banner = document.querySelector('.release-banner-placeholder');
-            const magazineSection = document.querySelector('.magazine-section');
-            if (!banner || !magazineSection) return;
+    function updateDividerPosition() {
+    if (!sectionDivider) return;
+    const banner = document.querySelector('.release-banner-placeholder');
+    const magazineSection = document.querySelector('.magazine-section');
+    if (!banner || !magazineSection) return;
 
-            const bannerRect = banner.getBoundingClientRect();
-            const magazineRect = magazineSection.getBoundingClientRect();
-            const dividerHeight = sectionDivider.offsetHeight;
-            const vh = window.innerHeight;
+    const bannerRect = banner.getBoundingClientRect();
+    const magazineRect = magazineSection.getBoundingClientRect();
+    const dividerHeight = sectionDivider.offsetHeight;
 
-            // Empty space between banner bottom and magazine top
-            const gapSize = magazineRect.top - bannerRect.bottom;
+    const gapSize = magazineRect.top - bannerRect.bottom;
+    const maxOffset = Math.max(0, (gapSize - dividerHeight) / 2);
 
-            // Max distance to slide so divider lands at gap center (never overshoots)
-            const maxOffset = Math.max(0, (gapSize - dividerHeight) / 2);
+    // Always apply the full offset — divider sits centered no matter where you are
+    sectionDivider.style.transform = `translateY(${-maxOffset}px)`;
+}
 
-            // Progress based on how much the banner has scrolled past
-            let progress = 1 - (bannerRect.bottom / vh);
-            progress = Math.max(0, Math.min(1, progress));
-
-           sectionDivider.style.transform = `translateY(${-maxOffset * progress}px)`;
-
-        document.addEventListener('scroll', updateDividerPosition, { passive: true });
-        window.addEventListener('resize', updateDividerPosition);
-        updateDividerPosition();
-
-const siteHeader = document.querySelector('.site-header');
+const headerBg = document.querySelector('.header-bg');
 
 function updateHeader() {
-    if (!siteHeader) return;
+    if (!headerBg) return;
     if (window.scrollY > 50) {
-        siteHeader.classList.add('scrolled');
+        headerBg.classList.add('visible');
     } else {
-        siteHeader.classList.remove('scrolled');
+        headerBg.classList.remove('visible');
     }
 }
 
