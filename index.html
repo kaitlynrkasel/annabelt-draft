@@ -41,7 +41,7 @@
       left: -20px;
       right: -20px;
       bottom: -20px;
-      background: url('potentialpg.jpg') center/cover no-repeat;
+      background: url('potentialbg.jpg') center/cover no-repeat;
       filter: blur(16px);
       z-index: -1;
     }
@@ -265,51 +265,31 @@
 
     /* ── ZINE CAROUSEL ── */
     .zine-side {
+      overflow: hidden;
       position: relative;
     }
 
-    .zine-wheel {
-      overflow-x: scroll;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      cursor: grab;
-      scrollbar-width: thin;
-      scrollbar-color: var(--warm-gold) transparent;
-      padding-top: 1rem;
-      padding-bottom: 1.5rem;
-      scroll-snap-type: x proximity;
-    }
-
-    .zine-wheel:active {
-      cursor: grabbing;
-    }
-
-    .zine-wheel::-webkit-scrollbar {
-      height: 3px;
-    }
-
-    .zine-wheel::-webkit-scrollbar-thumb {
-      background: var(--warm-gold);
-      border-radius: 2px;
-    }
-
     .zine-track {
-      display: inline-flex;
+      display: flex;
       gap: 1.5rem;
+      width: max-content;
+      animation: zine-scroll 20s linear infinite;
+      padding: 1rem 0 1.5rem;
     }
 
-    .zine-track::before,
-    .zine-track::after {
-      content: '';
-      flex-shrink: 0;
-      width: 1rem;
+    .zine-side:hover .zine-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes zine-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     .zine-card {
       flex-shrink: 0;
-      width: 170px;
+      width: 180px;
       text-align: center;
-      scroll-snap-align: center;
     }
 
     .zine-card img {
@@ -716,8 +696,7 @@
     <div class="zine-side">
       <h2 class="section-title">Anna on the Page</h2>
       <p class="section-subtitle">Monthly zine</p>
-      <div class="zine-wheel" id="zineWheel">
-        <div class="zine-track" id="zineTrack">
+      <div class="zine-track">
           <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
           <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
           <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
@@ -731,7 +710,6 @@
           <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
           <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
           <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
-        </div>
       </div>
     </div>
 
@@ -886,81 +864,6 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
-
-    // ── Zine infinite auto-scroll carousel
-    const zineWheel = document.getElementById('zineWheel');
-    if (zineWheel) {
-      let autoScroll = true;
-      let pauseTimeout;
-      const speed = 0.5; // pixels per frame
-
-      // Calculate halfway point (where duplicates begin)
-      function getHalfway() {
-        return zineWheel.scrollWidth / 2;
-      }
-
-      // Auto-scroll loop
-      function scrollStep() {
-        if (autoScroll) {
-          zineWheel.scrollLeft += speed;
-          // When we've scrolled past the first set, jump back seamlessly
-          if (zineWheel.scrollLeft >= getHalfway()) {
-            zineWheel.scrollLeft -= getHalfway();
-          }
-        }
-        requestAnimationFrame(scrollStep);
-      }
-
-      function pauseAuto() {
-        autoScroll = false;
-        clearTimeout(pauseTimeout);
-      }
-
-      function resumeAuto() {
-        clearTimeout(pauseTimeout);
-        pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
-      }
-
-      // Mouse drag scrolling
-      let isDragging = false;
-      let startX, scrollStart;
-
-      zineWheel.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.pageX;
-        scrollStart = zineWheel.scrollLeft;
-        pauseAuto();
-        e.preventDefault();
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        const dx = e.pageX - startX;
-        zineWheel.scrollLeft = scrollStart - dx;
-      });
-
-      window.addEventListener('mouseup', () => {
-        if (isDragging) {
-          isDragging = false;
-          resumeAuto();
-        }
-      });
-
-      // Mouse wheel (horizontal scroll on vertical wheel)
-      zineWheel.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        zineWheel.scrollLeft += e.deltaY || e.deltaX;
-        pauseAuto();
-        resumeAuto();
-      }, { passive: false });
-
-      // Touch support
-      zineWheel.addEventListener('touchstart', () => { pauseAuto(); }, { passive: true });
-      zineWheel.addEventListener('touchend', () => { resumeAuto(); }, { passive: true });
-
-      // Start the loop
-      requestAnimationFrame(scrollStep);
-    }
 
     // ── Gallery lightbox
     const lightbox = document.getElementById('lightbox');
