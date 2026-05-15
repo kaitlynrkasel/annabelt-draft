@@ -10,43 +10,6 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-.zine-wheel {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  padding: 1rem 0 1.5rem;
-  -webkit-overflow-scrolling: touch;
-  margin-right: -4rem;
-}
-
-.zine-wheel::-webkit-scrollbar {
-  height: 3px;
-}
-
-.zine-wheel::-webkit-scrollbar-thumb {
-  background: var(--warm-gold);
-  border-radius: 2px;
-}
-
-.zine-track {
-  display: flex;
-  gap: 2rem;
-  width: max-content;
-  padding: 0 2rem;
-}
-    
-body::before {
-  content: '';
-  position: fixed;
-  top: -20px;
-  left: -20px;
-  width: calc(100% + 40px);
-  height: calc(100% + 40px);
-  z-index: -1;
-  background: url('potentialbg.jpg') center/cover no-repeat;
-  filter: blur(15px);
-}
-
-    
     :root {
       --crimson: #8B1A1A;
       --deep-red: #6B0F0F;
@@ -71,26 +34,38 @@ body::before {
     }
 
     /* ── HERO / BANNER ── */
-   .hero {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
+    .hero {
+      position: relative;
+      width: 100%;
+      height: clamp(280px, 40vw, 550px);
+      overflow: hidden;
+    }
 
-.hero img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
 
-
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(transparent, var(--dark-bg));
+      pointer-events: none;
+    }
 
     /* ── NAVIGATION ── */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(30, 18, 12, 0.88);
+      background: rgba(13, 13, 13, 0.92);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(201, 168, 76, 0.15);
@@ -101,15 +76,15 @@ body::before {
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 
-.nav-inner {
-  max-width: 100%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4rem;
-  height: 64px;
-}
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
 
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
@@ -121,11 +96,11 @@ body::before {
       text-transform: uppercase;
     }
 
-   .nav-links {
-  display: flex;
-  gap: 4rem;
-  list-style: none;
-}
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
 
     .nav-links a {
       font-family: 'Montserrat', sans-serif;
@@ -221,12 +196,19 @@ body::before {
       border-top: 1px solid rgba(201, 168, 76, 0.1);
     }
 
-    /* ── ABOUT ── */
-    .about-content {
+    /* ── ABOUT + ZINE SPLIT ── */
+    .about-zine-wrapper {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 5rem 4rem;
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 3rem;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
       align-items: start;
+    }
+
+    .about-side {
+      padding-right: 1rem;
     }
 
     .about-photo {
@@ -235,6 +217,7 @@ body::before {
       object-fit: cover;
       border-radius: 4px;
       filter: brightness(0.95);
+      margin-bottom: 1.5rem;
     }
 
     .about-photo-placeholder {
@@ -250,6 +233,7 @@ body::before {
       letter-spacing: 0.1em;
       text-transform: uppercase;
       border: 1px solid rgba(201, 168, 76, 0.1);
+      margin-bottom: 1.5rem;
     }
 
     .about-text p {
@@ -259,6 +243,75 @@ body::before {
       font-weight: 300;
     }
 
+    .about-text p:first-of-type::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      float: left;
+      line-height: 1;
+      margin-right: 8px;
+      color: var(--warm-gold);
+      font-weight: 700;
+    }
+
+    /* ── ZINE CAROUSEL ── */
+    .zine-side {
+      overflow: hidden;
+    }
+
+    .zine-wheel {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 1rem 0 1.5rem;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      scrollbar-width: thin;
+      scrollbar-color: var(--warm-gold) transparent;
+    }
+
+    .zine-wheel:active {
+      cursor: grabbing;
+    }
+
+    .zine-wheel::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .zine-wheel::-webkit-scrollbar-thumb {
+      background: var(--warm-gold);
+      border-radius: 2px;
+    }
+
+    .zine-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+    }
+
+    .zine-card {
+      flex-shrink: 0;
+      width: 200px;
+      text-align: center;
+    }
+
+    .zine-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .zine-card img:hover {
+      transform: scale(1.03);
+    }
+
+    .zine-card .zine-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+      letter-spacing: 0.05em;
+    }
 
     /* ── GALLERY ── */
     .gallery-grid {
@@ -557,12 +610,18 @@ body::before {
         display: flex;
       }
 
-      .about-content {
+      .about-zine-wrapper {
         grid-template-columns: 1fr;
+        padding: 3rem 2rem;
+        gap: 2rem;
       }
 
       .about-photo-placeholder {
         aspect-ratio: 16/9;
+      }
+
+      .zine-card {
+        width: 160px;
       }
 
       .appearance-item {
@@ -612,7 +671,6 @@ body::before {
       </button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#annaonthepage" class="nav-link">Monthly Zine</a></li>
         <li><a href="#gallery" class="nav-link">Gallery</a></li>
         <li><a href="#appearances" class="nav-link">Appearances</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -620,50 +678,48 @@ body::before {
     </div>
   </nav>
 
-<!-- ═══ ABOUT ═══ -->
-  <section id="about" class="fade-in" style="max-width: 100%; padding: 3rem 4rem;">
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start;">
+  <!-- ═══ ABOUT + ZINE ═══ -->
+  <div class="about-zine-wrapper fade-in" id="about">
+
     <!-- LEFT: About -->
-      <div>
-        <h2 class="section-title">About</h2>
-        <p class="section-subtitle">The story so far</p>
-        <div class="about-text">
-          <img src="aboutphoto.JPG" alt="Anna Belt" style="width: 200px; aspect-ratio: 1/1; object-fit: cover; border-radius: 6px; float: left; margin: 0 1.2rem 1rem 0;">
-          <p>Anna Belt is a singer/songwriter based in Nashville, Tennessee, with roots in Columbus, Ohio. Her music combines the driving energy of rock with touches of folk and indie, resulting in a sound that is both powerful and deeply expressive. Inspired by iconic artists such as Stevie Nicks, Maggie Rogers, Linda Ronstadt, and Bonnie Raitt, Anna crafts songs that highlight her powerful voice and storytelling abilities.</p>
-          <p>Currently a junior at Belmont University, Anna is pursuing a double major in Songwriting and Media &amp; Entertainment Industries. In Nashville, she frequently performs at writers' rounds, where she captivates audiences with her authenticity and distinctive style. When back home in Columbus, she enjoys playing at local venues, delivering a mix of covers and heartfelt performances that connect with listeners.</p>
-          <p>Anna is proud to announce that her third single, "City of Angels", is out on all streaming platforms. Listen now!</p>
+    <div class="about-side">
+      <h2 class="section-title">About</h2>
+      <p class="section-subtitle">The story so far</p>
+      <img src="aboutphoto.JPG" alt="Anna Belt" class="about-photo">
+      <div class="about-text">
+        <p>Anna Belt is a rising artist whose sound blends warmth, grit, and storytelling into something distinctly her own. With the release of her debut EP, <em>The Heat</em>, she invites listeners into a world shaped by sun-drenched melodies and raw, honest lyricism.</p>
+        <p>Rooted in a deep love for music that moves people, Anna draws from folk, indie, and Americana traditions while carving out a lane that feels entirely fresh. Her live performances are intimate yet electric — the kind of shows that stay with you long after the last note fades.</p>
+        <p>Whether she's writing in quiet corners or commanding a stage, Anna Belt brings the heat.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Zine Carousel -->
+    <div class="zine-side">
+      <h2 class="section-title">Anna on the Page</h2>
+      <p class="section-subtitle">Monthly zine</p>
+      <div class="zine-wheel" id="zineWheel">
+        <div class="zine-track" id="zineTrack">
+          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
+          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
+          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
+          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
+          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
+          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
+          <!-- Duplicates for seamless loop -->
+          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
+          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
+          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
+          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
+          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
+          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
         </div>
       </div>
-   <!-- RIGHT: Monthly Zine -->
-      <div id="annaonthepage">
-        <h2 class="section-title">Monthly Zine</h2>
-        <p class="section-subtitle">Anna on the page</p>
-        <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: 300; margin-bottom: 2rem; max-width: 500px;">A monthly peek behind the curtain — what I'm listening to, where I've been, what's inspiring me, and what's coming next.</p>
-        <div class="zine-wheel">
-          <div class="zine-track">
-            <!-- Original set -->
-            <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
-              <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 1 — Jan 2026</p>
-            </a>
-            <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
-              <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 2 — Feb 2026</p>
-            </a>
-            <!-- Duplicate set for seamless loop -->
-            <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
-              <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 1 — Jan 2026</p>
-            </a>
-            <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
-              <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 2 — Feb 2026</p>
-            </a>
-          </div>
-        </div>
-      </div>
-  </section>
+    </div>
+
+  </div>
+
   <hr class="divider">
+
   <!-- ═══ GALLERY ═══ -->
   <section id="gallery" class="fade-in">
     <h2 class="section-title">Gallery</h2>
@@ -812,6 +868,81 @@ body::before {
 
     document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
+    // ── Zine infinite auto-scroll carousel
+    const zineWheel = document.getElementById('zineWheel');
+    if (zineWheel) {
+      let autoScroll = true;
+      let pauseTimeout;
+      const speed = 0.5; // pixels per frame
+
+      // Calculate halfway point (where duplicates begin)
+      function getHalfway() {
+        return zineWheel.scrollWidth / 2;
+      }
+
+      // Auto-scroll loop
+      function scrollStep() {
+        if (autoScroll) {
+          zineWheel.scrollLeft += speed;
+          // When we've scrolled past the first set, jump back seamlessly
+          if (zineWheel.scrollLeft >= getHalfway()) {
+            zineWheel.scrollLeft -= getHalfway();
+          }
+        }
+        requestAnimationFrame(scrollStep);
+      }
+
+      function pauseAuto() {
+        autoScroll = false;
+        clearTimeout(pauseTimeout);
+      }
+
+      function resumeAuto() {
+        clearTimeout(pauseTimeout);
+        pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
+      }
+
+      // Mouse drag scrolling
+      let isDragging = false;
+      let startX, scrollStart;
+
+      zineWheel.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX;
+        scrollStart = zineWheel.scrollLeft;
+        pauseAuto();
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.pageX - startX;
+        zineWheel.scrollLeft = scrollStart - dx;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          resumeAuto();
+        }
+      });
+
+      // Mouse wheel (horizontal scroll on vertical wheel)
+      zineWheel.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        zineWheel.scrollLeft += e.deltaY || e.deltaX;
+        pauseAuto();
+        resumeAuto();
+      }, { passive: false });
+
+      // Touch support
+      zineWheel.addEventListener('touchstart', () => { pauseAuto(); }, { passive: true });
+      zineWheel.addEventListener('touchend', () => { resumeAuto(); }, { passive: true });
+
+      // Start the loop
+      requestAnimationFrame(scrollStep);
+    }
+
     // ── Gallery lightbox
     const lightbox = document.getElementById('lightbox');
     document.querySelectorAll('.gallery-item img').forEach(img => {
@@ -821,52 +952,6 @@ body::before {
       });
     });
     lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
-
-// ── Auto-scroll zine wheel
-const zineWheel = document.querySelector('.zine-wheel');
-if (zineWheel) {
-  let autoScroll = true;
-  let pauseTimeout;
-
-  function step() {
-    if (autoScroll) {
-      zineWheel.scrollLeft += 0.5;
-      if (zineWheel.scrollLeft >= zineWheel.scrollWidth / 2) {
-        zineWheel.scrollLeft = 0;
-      }
-    }
-    requestAnimationFrame(step);
-  }
-
-  zineWheel.addEventListener('pointerdown', () => {
-    autoScroll = false;
-    clearTimeout(pauseTimeout);
-  });
-
-  zineWheel.addEventListener('pointerup', () => {
-    pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
-  });
-
-  zineWheel.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    zineWheel.scrollLeft += e.deltaY;
-    autoScroll = false;
-    clearTimeout(pauseTimeout);
-    pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
-  });
-
-  zineWheel.addEventListener('touchstart', () => {
-    autoScroll = false;
-    clearTimeout(pauseTimeout);
-  });
-
-  zineWheel.addEventListener('touchend', () => {
-    pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
-  });
-
-  requestAnimationFrame(step);
-}
-    
   </script>
 
 </body>
