@@ -1,767 +1,783 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anna Belt</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Franklin:wght@300;400;600&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna Belt | Official Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        :root {
-            --flame-orange: #FF6B35;
-            --amber: #F7931E;
-            --sunset-red: #C1121F;
-            --warm-yellow: #FDB750;
-            --deep-orange: #E85D04;
-            --cream: #FFF8F0;
-            --charcoal: #2B2D42;
-            --burgundy: #780000;
-            --moonlight: #E8F0F2;
-            --midnight-blue: #1B2845;
-            --lavender: #B8A9C9;
-            --silver: #C0C0C0;
-        }
+    :root {
+      --crimson: #8B1A1A;
+      --deep-red: #6B0F0F;
+      --warm-gold: #C9A84C;
+      --soft-gold: #D4B96A;
+      --cream: #F5F0E8;
+      --charcoal: #1A1A1A;
+      --dark-bg: #0D0D0D;
+      --warm-gray: #2A2522;
+      --text-light: #E8E0D4;
+      --text-muted: #A89B8C;
+    }
 
-        body {
-            font-family: 'Libre Franklin', sans-serif;
-            background: url('bgtheheat.jpg') center/cover no-repeat fixed;
-            background-color: var(--charcoal);
-            min-height: 100vh;
-            color: var(--cream);
-            overflow-x: hidden;
-            position: relative;
-        }
+    html { scroll-behavior: smooth; }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="5" numOctaves="12"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23grain)" opacity="0.5"/></svg>');
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.6;
-            mix-blend-mode: soft-light;
-        }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(ellipse at center,
-                    rgba(40, 15, 5, 0.05) 0%,
-                    rgba(20, 8, 3, 0.3) 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
+    /* ── HERO / BANNER ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: clamp(280px, 40vw, 550px);
+      overflow: hidden;
+    }
 
-        /* Header background gradient */
-        .header-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8rem;
-            background: linear-gradient(180deg,
-                rgba(15, 8, 3, 0.85) 0%,
-                rgba(15, 8, 3, 0.5) 60%,
-                transparent 100%);
-            z-index: 99;
-            pointer-events: none;
-             opacity: 0;
-    transition: opacity 0.4s ease;
-        }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
 
-        .header-bg.visible {
-    opacity: 1;
-}
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(transparent, var(--dark-bg));
+      pointer-events: none;
+    }
 
-        /* Logo */
-        .logo {
-            position: fixed;
-            top: 3rem;
-            left: 3rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            color: var(--cream);
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
+    /* ── NAVIGATION ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 13, 13, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      transition: box-shadow 0.3s ease;
+    }
 
-        .logo:hover {
-            transform: scale(1.05);
-            text-shadow: 2px 2px 12px rgba(255,107,53,0.6);
-        }
+    nav.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 3rem;
-            right: 3rem;
-            z-index: 100;
-        }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
 
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--warm-gold);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-.site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 1.5rem 3rem;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: transparent;
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
-    transition: background 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
-}
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
 
-.site-header.scrolled {
-    background: rgba(15, 8, 3, 0.75);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.3s ease;
+    }
 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--warm-gold);
+      transition: width 0.3s ease;
+    }
 
-        
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cream);
+    }
 
-        .menu-toggle span {
-            display: block;
-            width: 28px;
-            height: 3px;
-            background: var(--cream);
-            margin: 5px 0;
-            transition: all 0.3s ease;
-            box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-        }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
+    /* Mobile hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
 
-        .nav-links a {
-            color: var(--cream);
-            text-decoration: none;
-            font-weight: 400;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            position: relative;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-        }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--warm-gold);
+      transition: all 0.3s ease;
+    }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--warm-yellow);
-            transition: width 0.3s ease;
-        }
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
 
-        .nav-links a:hover {
-            color: var(--warm-yellow);
-            transform: translateY(-2px);
-        }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+    }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--warm-gold), transparent);
+      margin-top: 12px;
+    }
 
-        /* Top Spacer */
-        .top-spacer {
-            height: 7rem;
-            position: relative;
-            z-index: 10;
-        }
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
 
-        /* ===== Main Container (The Heat Banner) ===== */
-        .container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            z-index: 10;
-        }
+    .divider {
+      max-width: 1000px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+    }
 
-        .release-hero {
-            text-align: center;
-            max-width: 900px;
-            animation: fadeInUp 1.2s ease-out;
-        }
+    /* ── ABOUT ── */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: brightness(0.95);
+    }
 
-        .release-logo {
-            margin-bottom: 3rem;
-            position: relative;
-        }
+    .about-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(145deg, var(--warm-gray), var(--charcoal));
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(201, 168, 76, 0.1);
+    }
 
-        .release-banner-placeholder {
-            width: 100vw;
-            margin-left: calc(50% - 50vw);
-            aspect-ratio: 21/9;
-            background:
-                linear-gradient(180deg,
-                    rgba(0,0,0,0.05) 0%,
-                    rgba(0,0,0,0.25) 100%),
-                url('theheatbg.jpeg') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            mask-image: linear-gradient(to bottom,
-                transparent 0%,
-                black 5%,
-                black 95%,
-                transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom,
-                transparent 0%,
-                black 5%,
-                black 95%,
-                transparent 100%);
-            filter: contrast(1.05) brightness(1.25);
-            mix-blend-mode: luminosity;
-            transition: filter 0.3s ease;
-        }
+    .about-text p {
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+      font-weight: 300;
+    }
 
-        .release-banner-placeholder:hover {
-            filter: contrast(1.1) brightness(1.35);
-        }
+    .about-text p:first-of-type::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      float: left;
+      line-height: 1;
+      margin-right: 8px;
+      color: var(--warm-gold);
+      font-weight: 700;
+    }
 
-        .release-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 7rem;
-            font-weight: 300;
-            letter-spacing: 0.2em;
-            color: var(--cream);
-            text-shadow: 4px 4px 12px rgba(0,0,0,0.8);
-            position: relative;
-            z-index: 1;
-        }
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
 
-        .banner-bottom {
-            position: absolute;
-            bottom: 15%;
-            left: 0;
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            z-index: 1;
-        }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
 
-        .release-type {
-            font-size: 1.2rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--warm-yellow);
-            font-weight: 300;
-            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-            animation: fadeInUp 1.2s ease-out 0.2s backwards;
-        }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 4rem;
-            font-size: 1rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            text-decoration: none;
-            background: var(--cream);
-            color: var(--sunset-red);
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border-radius: 4px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            animation: fadeInUp 1.2s ease-out 0.4s backwards;
-            position: relative;
-            overflow: hidden;
-        }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.7);
+    }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: var(--warm-yellow);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            z-index: -1;
-        }
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, var(--warm-gray), var(--charcoal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(201, 168, 76, 0.08);
+      transition: border-color 0.3s ease;
+    }
 
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
+    .gallery-item:hover .gallery-placeholder {
+      border-color: rgba(201, 168, 76, 0.25);
+    }
 
-        .cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
-            color: var(--charcoal);
-        }
+    /* ── APPEARANCES ── */
+    .appearances-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
 
-        /* Divider between heat + magazine */
-        .section-divider {
-            text-align: center;
-            padding: 3rem 2rem 1rem;
-            margin-top: -1rem;
-            position: relative;
-            z-index: 10;
-            transition: transform 0.1s linear;
-            transform-origin: center center;
-            will-change: transform;
-        }
+    .appearance-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+      transition: background 0.3s ease;
+    }
 
-        .section-divider p {
-            font-size: 0.85rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--cream);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-            opacity: 0.9;
-        }
+    .appearance-item:hover {
+      background: rgba(201, 168, 76, 0.03);
+    }
 
-        .scroll-arrow {
-            font-size: 2rem;
-            color: var(--warm-yellow);
-            margin-top: 0.5rem;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-            animation: scrollBounce 2s ease-in-out infinite;
-        }
+    .appearance-date {
+      text-align: center;
+    }
 
-        @keyframes scrollBounce {
-            0%, 100% {
-                transform: translateY(0);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translateY(8px);
-                opacity: 1;
-            }
-        }
+    .appearance-date .month {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--warm-gold);
+      font-weight: 600;
+    }
 
-        /* ===== Magazine Section ===== */
-        .magazine-section {
-            min-height: auto;
-            padding: 3rem 0 1.5rem;
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(180deg,
-                rgba(15, 8, 3, 0.85) 0%,
-                rgba(30, 15, 5, 0.92) 50%,
-                rgba(15, 8, 3, 0.85) 100%);
-            box-shadow:
-                inset 0 30px 60px rgba(0,0,0,0.4),
-                inset 0 -30px 60px rgba(0,0,0,0.4);
-        }
+    .appearance-date .day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.1;
+    }
 
-        .magazine-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding: 0 2rem;
-        }
+    .appearance-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 2px;
+    }
 
-        .magazine-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 7vw, 5rem);
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            color: var(--cream);
-            text-shadow: 2px 2px 12px rgba(0,0,0,0.5);
-            margin-bottom: 0.25rem;
-        }
+    .appearance-info p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
 
-        .magazine-subtitle {
-            font-style: italic;
-            color: var(--cream);
-            opacity: 0.7;
-        }
+    .btn-tickets {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 10px 24px;
+      border: 1px solid var(--warm-gold);
+      color: var(--warm-gold);
+      background: transparent;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
 
-        .issue-label {
-            font-size: 0.85rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--warm-yellow);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            transition: opacity 0.3s ease;
-            position: relative;
-            z-index: 11;
-        }
+    .btn-tickets:hover {
+      background: var(--warm-gold);
+      color: var(--dark-bg);
+    }
 
-        .magazine-pages {
-            display: flex;
-            gap: 2rem;
-            width: 100%;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 2rem max(2rem, calc(50vw - 350px)) 3rem;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 248, 240, 0.3) transparent;
-        }
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
 
-        .magazine-pages::-webkit-scrollbar {
-            height: 8px;
-        }
-        .magazine-pages::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .magazine-pages::-webkit-scrollbar-thumb {
-            background: rgba(255, 248, 240, 0.3);
-            border-radius: 4px;
-        }
+    .contact-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
 
-        .magazine-page {
-            flex: 0 0 auto;
-            height: 38vh;
-            width: auto;
-            max-width: 90vw;
-            border-radius: 4px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, height 0.4s ease;
-            scroll-snap-align: center;
-            display: block;
-        }
+    .contact-info p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
 
-        .magazine-page:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.7);
-        }
+    .contact-info a {
+      color: var(--warm-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
-        .magazine-nav {
-            position: absolute;
-            top: 60%;
-            transform: translateY(-50%);
-            background: rgba(255, 248, 240, 0.15);
-            border: 1px solid rgba(255, 248, 240, 0.3);
-            color: var(--cream);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.4rem;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 11;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
+    .contact-info a:hover {
+      color: var(--soft-gold);
+    }
 
-        .magazine-nav:hover {
-            background: rgba(255, 248, 240, 0.3);
-            transform: translateY(-50%) scale(1.1);
-            border-color: var(--warm-yellow);
-            color: var(--warm-yellow);
-        }
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
 
-        .magazine-nav.prev { left: 2rem; }
-        .magazine-nav.next { right: 2rem; }
+    .social-links a {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
 
-        .scroll-hint-text {
-            text-align: center;
-            font-size: 0.8rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--cream);
-            opacity: 0.5;
-            margin-top: 1rem;
-        }
+    .social-links a:hover {
+      color: var(--warm-gold);
+    }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .logo { top: 2rem; left: 2rem; font-size: 1.6rem; }
-            nav { top: 2rem; right: 2rem; }
-            .nav-links { gap: 1.5rem; }
-            .release-title { font-size: 5rem; }
-        }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-        @media (max-width: 768px) {
-            .logo { font-size: 1.4rem; top: 1.5rem; left: 1.5rem; }
-            nav { top: 1.5rem; right: 1.5rem; }
-            .menu-toggle { display: block; }
+    .contact-form input,
+    .contact-form textarea {
+      background: rgba(42, 37, 34, 0.6);
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      color: var(--text-light);
+      padding: 14px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
 
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                height: 100vh;
-                width: 70%;
-                max-width: 300px;
-                background: rgba(43, 45, 66, 0.98);
-                flex-direction: column;
-                gap: 2rem;
-                padding: 6rem 2rem 2rem 2rem;
-                transition: right 0.4s ease;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.5);
-            }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
 
-            .nav-links.active { right: 0; }
-            .nav-links a { font-size: 1rem; }
-            .release-title { font-size: 3.5rem; }
-            .release-type { font-size: 1rem; }
-            .cta-button { padding: 1rem 2.5rem; font-size: 0.9rem; }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: rgba(201, 168, 76, 0.4);
+    }
 
-            .magazine-pages { padding: 1rem 5vw 2rem; }
-            .magazine-page { width: 90vw; }
-            .magazine-nav { display: none; }
-        }
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
 
-        @media (max-width: 480px) {
-            .release-title { font-size: 2.5rem; letter-spacing: 0.15em; }
-            .release-banner-placeholder { aspect-ratio: 4/3; }
-        }
-    </style>
+    .btn-submit {
+      align-self: flex-start;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, var(--crimson), var(--deep-red));
+      color: var(--cream);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #A02020, var(--crimson));
+      box-shadow: 0 4px 20px rgba(139, 26, 26, 0.3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.08);
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    footer .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--warm-gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(13, 13, 13, 0.97);
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .about-photo-placeholder {
+        aspect-ratio: 16/9;
+      }
+
+      .appearance-item {
+        grid-template-columns: 80px 1fr;
+        gap: 1rem;
+      }
+
+      .btn-tickets {
+        display: none;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+
+    /* ── FADE-IN ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
-    <!-- Header background gradient -->
-    <div class="header-bg"></div>
 
-    <!-- Logo -->
-<header class="site-header">
-    <div class="logo">ANNA BELT</div>
+  <!-- ═══ HERO BANNER ═══ -->
+  <header class="hero">
+    <img src="images/banner.jpg" alt="Anna Belt - The Heat EP Out Now">
+  </header>
 
-    <nav>
-        <button class="menu-toggle" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <ul class="nav-links">
-            <li><a href="about.html">About</a></li>
-            <li><a href="releases.html">Releases</a></li>
-            <li><a href="appearances.html">Appearances</a></li>
-            <li><a href="create.html">Create</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="shows.html">Shows</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-</header>
-
-    <div class="top-spacer"></div>
-
-    <!-- The Heat Banner (FIRST) -->
-    <div class="container">
-        <div class="release-hero">
-            <div class="release-logo">
-                <div class="release-banner-placeholder">
-                    <h1 class="release-title">THE HEAT</h1>
-                    <div class="banner-bottom">
-                        <p class="release-type">New EP — Out Now</p>
-                        <a href="https://linktr.ee/annabelt" class="cta-button" target="_blank">Listen Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Anna Belt</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#appearances" class="nav-link">Appearances</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <!-- Divider -->
-    <div class="section-divider">
-        <p>Read the Zine</p>
-        <div class="scroll-arrow">↓</div>
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" class="fade-in">
+    <h2 class="section-title">About</h2>
+    <p class="section-subtitle">The story so far</p>
+    <div class="about-content">
+      <div class="about-photo-placeholder">Photo</div>
+      <!-- Replace placeholder with: <img src="images/about.jpg" alt="Anna Belt" class="about-photo"> -->
+      <div class="about-text">
+        <p>Anna Belt is a rising artist whose sound blends warmth, grit, and storytelling into something distinctly her own. With the release of her debut EP, <em>The Heat</em>, she invites listeners into a world shaped by sun-drenched melodies and raw, honest lyricism.</p>
+        <p>Rooted in a deep love for music that moves people, Anna draws from folk, indie, and Americana traditions while carving out a lane that feels entirely fresh. Her live performances are intimate yet electric — the kind of shows that stay with you long after the last note fades.</p>
+        <p>Whether she's writing in quiet corners or commanding a stage, Anna Belt brings the heat.</p>
+      </div>
     </div>
+  </section>
 
-    <!-- Magazine Section (SECOND) -->
-    <section class="magazine-section">
-        <div class="magazine-header">
-            <h2 class="magazine-title">Anna on the Page</h2>
-            <p class="magazine-subtitle">A monthly zine</p>
+  <hr class="divider">
+
+  <!-- ═══ GALLERY ═══ -->
+  <section id="gallery" class="fade-in">
+    <h2 class="section-title">Gallery</h2>
+    <p class="section-subtitle">Moments captured</p>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div class="gallery-placeholder">Photo 1</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">Photo 2</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">Photo 3</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">Photo 4</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">Photo 5</div></div>
+      <div class="gallery-item"><div class="gallery-placeholder">Photo 6</div></div>
+      <!--
+        Replace placeholders with real images:
+        <div class="gallery-item"><img src="images/gallery-1.jpg" alt="Description"></div>
+      -->
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══ APPEARANCES ═══ -->
+  <section id="appearances" class="fade-in">
+    <h2 class="section-title">Appearances</h2>
+    <p class="section-subtitle">Upcoming shows</p>
+    <div class="appearances-list">
+      <div class="appearance-item">
+        <div class="appearance-date">
+          <div class="month">Jun</div>
+          <div class="day">14</div>
         </div>
-
-        <p class="issue-label" id="issueLabel">Issue 01 · May 2026</p>
-
-        <div class="magazine-pages">
-            <img src="zine1.png" alt="Anna on the Page — page 1" class="magazine-page"
-                 data-issue="Issue 01 · May 2026">
-            <img src="zine2.png" alt="Anna on the Page — page 2" class="magazine-page" loading="lazy"
-                 data-issue="Issue 01 · May 2026">
+        <div class="appearance-info">
+          <h3>Sample Venue Name</h3>
+          <p>Nashville, TN &mdash; Doors 7pm</p>
         </div>
+        <a href="#" class="btn-tickets">Tickets</a>
+      </div>
+      <div class="appearance-item">
+        <div class="appearance-date">
+          <div class="month">Jul</div>
+          <div class="day">02</div>
+        </div>
+        <div class="appearance-info">
+          <h3>Another Great Venue</h3>
+          <p>Austin, TX &mdash; Doors 8pm</p>
+        </div>
+        <a href="#" class="btn-tickets">Tickets</a>
+      </div>
+      <div class="appearance-item">
+        <div class="appearance-date">
+          <div class="month">Aug</div>
+          <div class="day">19</div>
+        </div>
+        <div class="appearance-info">
+          <h3>Summer Music Festival</h3>
+          <p>Los Angeles, CA &mdash; All Day</p>
+        </div>
+        <a href="#" class="btn-tickets">Tickets</a>
+      </div>
+    </div>
+  </section>
 
-        <p class="scroll-hint-text">← Swipe to flip pages →</p>
+  <hr class="divider">
 
-        <button class="magazine-nav prev" aria-label="Previous page">←</button>
-        <button class="magazine-nav next" aria-label="Next page">→</button>
-    </section>
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="fade-in">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-subtitle">Get in touch</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Booking &amp; Inquiries</h3>
+        <p>For booking, press, and general inquiries, reach out below or send an email directly.</p>
+        <p><a href="mailto:booking@annabelt.com">booking@annabelt.com</a></p>
+        <div class="social-links">
+          <a href="#" target="_blank">Instagram</a>
+          <a href="#" target="_blank">Spotify</a>
+          <a href="#" target="_blank">YouTube</a>
+          <a href="#" target="_blank">TikTok</a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent! (Connect a form backend to make this functional)');">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Your message..." required></textarea>
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <span class="footer-logo">Anna Belt</span>
+    <p>&copy; 2026 Anna Belt. All rights reserved.</p>
+  </footer>
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+  <!-- ═══ LIGHTBOX ═══ -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Gallery image">
+  </div>
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
+  <script>
+    // ── Sticky nav shadow
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
 
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('nav')) {
-                navLinks.classList.remove('active');
-            }
-        });
+    // ── Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+    // ── Close menu on link click
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
 
-        const magazinePages = document.querySelector('.magazine-pages');
-        const prevBtn = document.querySelector('.magazine-nav.prev');
-        const nextBtn = document.querySelector('.magazine-nav.next');
-        const issueLabel = document.getElementById('issueLabel');
+    // ── Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-link');
 
-        function updateIssueLabel() {
-            if (!magazinePages || !issueLabel) return;
-            const pages = magazinePages.querySelectorAll('.magazine-page');
-            const center = magazinePages.scrollLeft + magazinePages.clientWidth / 2;
-            let closest = null;
-            let minDist = Infinity;
-
-            pages.forEach(p => {
-                const pageCenter = p.offsetLeft + p.offsetWidth / 2;
-                const dist = Math.abs(pageCenter - center);
-                if (dist < minDist) { minDist = dist; closest = p; }
-            });
-
-            if (closest && closest.dataset.issue) {
-                issueLabel.textContent = closest.dataset.issue;
-            }
+    const observerOptions = { rootMargin: '-30% 0px -70% 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navItems.forEach(item => item.classList.remove('active'));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
         }
+      });
+    }, observerOptions);
 
-        function scrollMagazine(direction) {
-            if (!magazinePages) return;
-            const pages = Array.from(magazinePages.querySelectorAll('.magazine-page'));
-            if (pages.length === 0) return;
+    sections.forEach(section => observer.observe(section));
 
-            const viewportCenter = magazinePages.scrollLeft + magazinePages.clientWidth / 2;
-            let currentIndex = 0;
-            let minDist = Infinity;
-            pages.forEach((p, i) => {
-                const pageCenter = p.offsetLeft + p.offsetWidth / 2;
-                const dist = Math.abs(pageCenter - viewportCenter);
-                if (dist < minDist) { minDist = dist; currentIndex = i; }
-            });
-
-            let nextIndex = currentIndex + direction;
-            if (nextIndex < 0) nextIndex = pages.length - 1;
-            if (nextIndex >= pages.length) nextIndex = 0;
-
-            const target = pages[nextIndex];
-            const targetScroll = target.offsetLeft - (magazinePages.clientWidth - target.offsetWidth) / 2;
-
-            magazinePages.scrollTo({
-                left: targetScroll,
-                behavior: 'smooth'
-            });
+    // ── Fade-in on scroll
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
+      });
+    }, { threshold: 0.1 });
 
-        if (magazinePages) magazinePages.addEventListener('scroll', updateIssueLabel);
-        window.addEventListener('load', updateIssueLabel);
-        if (prevBtn) prevBtn.addEventListener('click', () => scrollMagazine(-1));
-        if (nextBtn) nextBtn.addEventListener('click', () => scrollMagazine(1));
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
-        const sectionDivider = document.querySelector('.section-divider');
+    // ── Gallery lightbox
+    const lightbox = document.getElementById('lightbox');
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.querySelector('img').src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+  </script>
 
-    function updateDividerPosition() {
-    if (!sectionDivider) return;
-    const banner = document.querySelector('.release-banner-placeholder');
-    const magazineSection = document.querySelector('.magazine-section');
-    if (!banner || !magazineSection) return;
-
-    const bannerRect = banner.getBoundingClientRect();
-    const magazineRect = magazineSection.getBoundingClientRect();
-    const dividerHeight = sectionDivider.offsetHeight;
-
-    const gapSize = magazineRect.top - bannerRect.bottom;
-    const maxOffset = Math.max(0, (gapSize - dividerHeight) / 2);
-
-    // Always apply the full offset — divider sits centered no matter where you are
-    sectionDivider.style.transform = `translateY(${-maxOffset}px)`;
-}
-
-const headerBg = document.querySelector('.header-bg');
-
-function updateHeader() {
-    if (!headerBg) return;
-    if (window.scrollY > 50) {
-        headerBg.classList.add('visible');
-    } else {
-        headerBg.classList.remove('visible');
-    }
-}
-
-document.addEventListener('scroll', updateHeader, { passive: true });
-updateHeader();
-
-document.addEventListener('scroll', updateDividerPosition, { passive: true });
-window.addEventListener('resize', updateDividerPosition);
-window.addEventListener('load', updateDividerPosition);
-updateDividerPosition();
-
-        
-    </script>
 </body>
 </html>
