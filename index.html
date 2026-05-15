@@ -41,7 +41,7 @@
       left: -20px;
       right: -20px;
       bottom: -20px;
-      background: url('potentialbg.jpg') center/cover no-repeat;
+      background: url('potentialpg.jpg') center/cover no-repeat;
       filter: blur(16px);
       z-index: -1;
     }
@@ -265,18 +265,19 @@
 
     /* ── ZINE CAROUSEL ── */
     .zine-side {
-      overflow: hidden;
       position: relative;
     }
 
     .zine-wheel {
       overflow-x: scroll;
       overflow-y: hidden;
-      padding: 1rem 2rem 1.5rem 2rem;
       -webkit-overflow-scrolling: touch;
       cursor: grab;
       scrollbar-width: thin;
       scrollbar-color: var(--warm-gold) transparent;
+      padding-top: 1rem;
+      padding-bottom: 1.5rem;
+      scroll-snap-type: x proximity;
     }
 
     .zine-wheel:active {
@@ -293,16 +294,22 @@
     }
 
     .zine-track {
-      display: flex;
-      gap: 2rem;
-      width: max-content;
-      padding-right: 2rem;
+      display: inline-flex;
+      gap: 1.5rem;
+    }
+
+    .zine-track::before,
+    .zine-track::after {
+      content: '';
+      flex-shrink: 0;
+      width: 1rem;
     }
 
     .zine-card {
       flex-shrink: 0;
-      width: 180px;
+      width: 170px;
       text-align: center;
+      scroll-snap-align: center;
     }
 
     .zine-card img {
