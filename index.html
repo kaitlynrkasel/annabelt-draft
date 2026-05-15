@@ -217,21 +217,21 @@
       align-items: start;
     }
 
-   .about-side {
-  padding-right: 1rem;
-  display: flow-root;
-}
+    .about-side {
+      padding-right: 1rem;
+      display: flow-root;
+    }
 
-  .about-photo {
-  float: left;
-  width: 55%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  border-radius: 4px;
-  filter: brightness(0.95);
-  margin: 0.4rem 1.2rem 0.6rem 0;
-  shape-outside: margin-box;
-}
+    .about-photo {
+      float: left;
+      width: 55%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: brightness(0.95);
+      margin: 0.4rem 1.2rem 0.6rem 0;
+      shape-outside: margin-box;
+    }
 
     .about-photo-placeholder {
       width: 100%;
@@ -266,23 +266,18 @@
       font-weight: 700;
     }
 
-.zine-side {
-  min-width: 0;
-}
-
-.zine-mask {
-  overflow: hidden;
-  ...
-}
-
-    
     /* ── ZINE CAROUSEL ── */
-.zine-mask {
-  overflow: hidden;
-  position: relative;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-}
+    .zine-side {
+      min-width: 0;
+    }
+
+    .zine-mask {
+      overflow: hidden;
+      position: relative;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
     .zine-track {
       display: flex;
       gap: 1.5rem;
@@ -292,26 +287,26 @@
     }
 
     .zine-mask:hover .zine-track {
-  animation-play-state: paused;
-}
+      animation-play-state: paused;
+    }
 
     @keyframes zine-scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
 
-.zine-card {
-  flex-shrink: 0;
-  text-align: center;        /* remove width: 280px */
-}
+    .zine-card {
+      flex-shrink: 0;
+      text-align: center;
+    }
 
-.zine-card img {
-  height: 220px;             /* pick whatever looks right */
-  width: auto;               /* intrinsic — no letterbox */
-  display: block;
-  border-radius: 4px;
-  transition: transform 0.3s ease;
-}
+    .zine-card img {
+      height: 220px;
+      width: auto;
+      display: block;
+      border-radius: 4px;
+      transition: transform 0.3s ease;
+    }
 
     .zine-card img:hover {
       transform: scale(1.03);
@@ -322,6 +317,13 @@
       color: var(--text-muted);
       margin-top: 0.6rem;
       letter-spacing: 0.05em;
+    }
+
+    /* Appearances nested inside zine-side — reset section defaults */
+    .zine-side > section {
+      max-width: none;
+      padding: 3rem 0 0 0;
+      margin: 0;
     }
 
     /* ── GALLERY ── */
@@ -697,14 +699,14 @@
       <h2 class="section-title">About</h2>
       <p class="section-subtitle">The story so far</p>
       <img src="aboutphoto.JPG" alt="Anna Belt" class="about-photo">
-     <div class="about-text">
-  <p>Anna Belt is a singer/songwriter based in Nashville, Tennessee, with roots in Columbus, Ohio. Her music combines the driving energy of rock with touches of folk and indie, resulting in a sound that is both powerful and deeply expressive. Inspired by iconic artists such as Stevie Nicks, Maggie Rogers, Linda Ronstadt, and Bonnie Raitt, Anna crafts songs that highlight her powerful voice and storytelling abilities.</p>
-  <p>Currently a junior at Belmont University, Anna is pursuing a double major in Songwriting and Media &amp; Entertainment Industries. In Nashville, she frequently performs at writers' rounds, where she captivates audiences with her authenticity and distinctive style. When back home in Columbus, she enjoys playing at local venues, delivering a mix of covers and heartfelt performances that connect with listeners.</p>
-  <p>Anna is proud to announce that her third single, <em>"City of Angels"</em>, is out on all streaming platforms. Listen now!</p>
-</div>
+      <div class="about-text">
+        <p>Anna Belt is a singer/songwriter based in Nashville, Tennessee, with roots in Columbus, Ohio. Her music combines the driving energy of rock with touches of folk and indie, resulting in a sound that is both powerful and deeply expressive. Inspired by iconic artists such as Stevie Nicks, Maggie Rogers, Linda Ronstadt, and Bonnie Raitt, Anna crafts songs that highlight her powerful voice and storytelling abilities.</p>
+        <p>Currently a junior at Belmont University, Anna is pursuing a double major in Songwriting and Media &amp; Entertainment Industries. In Nashville, she frequently performs at writers' rounds, where she captivates audiences with her authenticity and distinctive style. When back home in Columbus, she enjoys playing at local venues, delivering a mix of covers and heartfelt performances that connect with listeners.</p>
+        <p>Anna is proud to announce that her third single, <em>"City of Angels"</em>, is out on all streaming platforms. Listen now!</p>
+      </div>
     </div>
 
-    <!-- RIGHT: Zine Carousel -->
+    <!-- RIGHT: Zine Carousel + Appearances -->
     <div class="zine-side">
       <h2 class="section-title">Anna on the Page</h2>
       <p class="section-subtitle">Monthly zine</p>
@@ -725,6 +727,47 @@
           <div class="zine-card"><img src="zine2.png" alt="May 2026"><div class="zine-label">May 2026</div></div>
         </div>
       </div>
+
+      <!-- ═══ APPEARANCES (nested under zine) ═══ -->
+      <section id="appearances" class="fade-in">
+        <h2 class="section-title">Appearances</h2>
+        <p class="section-subtitle">Upcoming shows</p>
+        <div class="appearances-list">
+          <div class="appearance-item">
+            <div class="appearance-date">
+              <div class="month">Jun</div>
+              <div class="day">14</div>
+            </div>
+            <div class="appearance-info">
+              <h3>Sample Venue Name</h3>
+              <p>Nashville, TN &mdash; Doors 7pm</p>
+            </div>
+            <a href="#" class="btn-tickets">Tickets</a>
+          </div>
+          <div class="appearance-item">
+            <div class="appearance-date">
+              <div class="month">Jul</div>
+              <div class="day">02</div>
+            </div>
+            <div class="appearance-info">
+              <h3>Another Great Venue</h3>
+              <p>Austin, TX &mdash; Doors 8pm</p>
+            </div>
+            <a href="#" class="btn-tickets">Tickets</a>
+          </div>
+          <div class="appearance-item">
+            <div class="appearance-date">
+              <div class="month">Aug</div>
+              <div class="day">19</div>
+            </div>
+            <div class="appearance-info">
+              <h3>Summer Music Festival</h3>
+              <p>Los Angeles, CA &mdash; All Day</p>
+            </div>
+            <a href="#" class="btn-tickets">Tickets</a>
+          </div>
+        </div>
+      </section>
     </div>
 
   </div>
@@ -742,53 +785,6 @@
       <div class="gallery-item"><div class="gallery-placeholder">Photo 4</div></div>
       <div class="gallery-item"><div class="gallery-placeholder">Photo 5</div></div>
       <div class="gallery-item"><div class="gallery-placeholder">Photo 6</div></div>
-      <!--
-        Replace placeholders with real images:
-        <div class="gallery-item"><img src="images/gallery-1.jpg" alt="Description"></div>
-      -->
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══ APPEARANCES ═══ -->
-  <section id="appearances" class="fade-in">
-    <h2 class="section-title">Appearances</h2>
-    <p class="section-subtitle">Upcoming shows</p>
-    <div class="appearances-list">
-      <div class="appearance-item">
-        <div class="appearance-date">
-          <div class="month">Jun</div>
-          <div class="day">14</div>
-        </div>
-        <div class="appearance-info">
-          <h3>Sample Venue Name</h3>
-          <p>Nashville, TN &mdash; Doors 7pm</p>
-        </div>
-        <a href="#" class="btn-tickets">Tickets</a>
-      </div>
-      <div class="appearance-item">
-        <div class="appearance-date">
-          <div class="month">Jul</div>
-          <div class="day">02</div>
-        </div>
-        <div class="appearance-info">
-          <h3>Another Great Venue</h3>
-          <p>Austin, TX &mdash; Doors 8pm</p>
-        </div>
-        <a href="#" class="btn-tickets">Tickets</a>
-      </div>
-      <div class="appearance-item">
-        <div class="appearance-date">
-          <div class="month">Aug</div>
-          <div class="day">19</div>
-        </div>
-        <div class="appearance-info">
-          <h3>Summer Music Festival</h3>
-          <p>Los Angeles, CA &mdash; All Day</p>
-        </div>
-        <a href="#" class="btn-tickets">Tickets</a>
-      </div>
     </div>
   </section>
 
