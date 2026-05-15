@@ -11,24 +11,24 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 .zine-wheel {
-  overflow: hidden;
-  padding: 1rem 0 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 2rem 1.5rem;
+  scroll-behavior: smooth;
+}
+
+.zine-wheel::-webkit-scrollbar {
+  height: 3px;
+}
+
+.zine-wheel::-webkit-scrollbar-thumb {
+  background: var(--warm-gold);
+  border-radius: 2px;
 }
 
 .zine-track {
   display: flex;
   gap: 2rem;
-  animation: scroll-zines 15s linear infinite;
   width: max-content;
-}
-
-.zine-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes scroll-zines {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
     
 body::before {
@@ -818,6 +818,44 @@ body::before {
       });
     });
     lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+
+// ── Auto-scroll zine wheel
+const zineWheel = document.querySelector('.zine-wheel');
+if (zineWheel) {
+  let scrollSpeed = 1;
+  let autoScroll = true;
+  let pauseTimeout;
+
+  function step() {
+    if (autoScroll && zineWheel.scrollWidth > zineWheel.clientWidth) {
+      zineWheel.scrollLeft += scrollSpeed;
+      // Loop back when we've scrolled halfway (the duplicate set)
+      if (zineWheel.scrollLeft >= zineWheel.scrollWidth / 2) {
+        zineWheel.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Pause auto-scroll when user interacts
+  zineWheel.addEventListener('pointerdown', () => {
+    autoScroll = false;
+    clearTimeout(pauseTimeout);
+  });
+
+  zineWheel.addEventListener('pointerup', () => {
+    pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
+  });
+
+  zineWheel.addEventListener('wheel', () => {
+    autoScroll = false;
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
+  });
+
+  requestAnimationFrame(step);
+}
+    
   </script>
 
 </body>
