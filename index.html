@@ -288,20 +288,21 @@
       100% { transform: translateX(-50%); }
     }
 
-    .zine-card {
-      flex-shrink: 0;
-      width: 180px;
-      text-align: center;
-    }
+   .zine-card {
+  flex-shrink: 0;
+  width: 280px;          /* was 180px — wider to fit landscape */
+  text-align: center;
+}
 
-    .zine-card img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 4px;
-      display: block;
-      transition: transform 0.3s ease;
-    }
+.zine-card img {
+  width: 100%;
+  aspect-ratio: 4/3;     /* match the zine's landscape ratio */
+  object-fit: contain;   /* show whole image, never crop */
+  background: var(--cream); /* fills any letterbox space cleanly */
+  border-radius: 4px;
+  display: block;
+  transition: transform 0.3s ease;
+}
 
     .zine-card img:hover {
       transform: scale(1.03);
