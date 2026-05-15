@@ -10,15 +10,20 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-#annaonthepage div::-webkit-scrollbar {
-  height: 4px;
+.zine-wheel::-webkit-scrollbar {
+  width: 3px;
 }
-#annaonthepage div::-webkit-scrollbar-thumb {
+.zine-wheel::-webkit-scrollbar-thumb {
   background: var(--warm-gold);
   border-radius: 2px;
 }
-#annaonthepage a:hover img {
+.zine-wheel {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+.zine-card:hover img {
   transform: scale(1.03);
+  transition: transform 0.3s ease;
 }
     
 body::before {
