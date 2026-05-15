@@ -626,8 +626,8 @@ body::before {
   </nav>
 
   <!-- ═══ ABOUT ═══ -->
-<section id="about" class="fade-in" style="max-width: 1200px;">
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+<section id="about" class="fade-in" style="max-width: 1400px;">
+  <div style="display: grid; grid-template-columns: 2fr 3fr; gap: 4rem; align-items: start;">
 
     <!-- LEFT: About -->
     <div>
@@ -644,24 +644,24 @@ body::before {
     </div>
 
     <!-- RIGHT: Anna on the Page -->
-    <div id="annaonthepage">
-      <h2 class="section-title">Anna on the Page</h2>
-      <p class="section-subtitle">Monthly zines</p>
-      <div style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x mandatory;">
-        <!-- Replace these placeholders with your actual zine covers -->
-        <a href="zines/issue1.pdf" target="_blank" style="flex: 0 0 200px; scroll-snap-align: start; text-decoration: none;">
-          <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; border: 1px solid rgba(201, 168, 76, 0.15); transition: transform 0.3s ease;">
-          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Issue 1 — Jan 2026</p>
-        </a>
-        <a href="zines/issue2.pdf" target="_blank" style="flex: 0 0 200px; scroll-snap-align: start; text-decoration: none;">
-          <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; border: 1px solid rgba(201, 168, 76, 0.15); transition: transform 0.3s ease;">
-          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Issue 2 — Feb 2026</p>
-        </a>
-        <!-- Add more issues following the same pattern -->
-      </div>
+    <!-- RIGHT: Anna on the Page -->
+<div id="annaonthepage">
+  <h2 class="section-title">Anna on the Page</h2>
+  <p class="section-subtitle">Monthly zines</p>
+  <div class="zine-wheel" style="height: 500px; overflow-y: auto; perspective: 800px; padding: 2rem 1rem;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+      <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; width: 260px;">
+        <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 1 — Jan 2026</p>
+      </a>
+      <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; width: 260px;">
+        <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 2 — Feb 2026</p>
+      </a>
+      <!-- Add more issues here -->
     </div>
-
   </div>
+</div>
 </section>
 
   <!-- ═══ GALLERY ═══ -->
