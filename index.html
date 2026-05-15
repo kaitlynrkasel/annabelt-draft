@@ -10,20 +10,23 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-.zine-wheel::-webkit-scrollbar {
-  width: 3px;
+.zine-wheel {
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  scroll-snap-type: x mandatory;
 }
+
+.zine-wheel::-webkit-scrollbar {
+  height: 3px;
+}
+
 .zine-wheel::-webkit-scrollbar-thumb {
   background: var(--warm-gold);
   border-radius: 2px;
 }
-.zine-wheel {
-  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-}
-.zine-card:hover img {
-  transform: scale(1.03);
-  transition: transform 0.3s ease;
+
+.zine-card {
+  scroll-snap-align: start;
 }
     
 body::before {
@@ -622,16 +625,14 @@ body::before {
   </nav>
 
   <!-- ═══ ABOUT ═══ -->
-<section id="about" class="fade-in" style="max-width: 1400px;">
-  <div style="display: grid; grid-template-columns: 2fr 3fr; gap: 4rem; align-items: start;">
+<section id="about" class="fade-in" style="max-width: 100%; padding: 5rem 4rem;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
 
     <!-- LEFT: About -->
-    <div>
+    <div style="background: rgba(20, 14, 10, 0.5); border-radius: 8px; padding: 2.5rem; border: 1px solid rgba(201, 168, 76, 0.08);">
       <h2 class="section-title">About</h2>
       <p class="section-subtitle">The story so far</p>
-      <div style="margin-bottom: 1.5rem;">
-        <img src="headshot.png" alt="Anna Belt" class="about-photo" style="width: 60%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; float: left; margin: 0 1.5rem 1rem 0;">
-      </div>
+      <img src="headshot.png" alt="Anna Belt" style="width: 100%; max-width: 320px; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; display: block; margin: 0 auto 1.5rem;">
       <div class="about-text">
         <p>Anna Belt is a singer/songwriter based in Nashville, Tennessee, with roots in Columbus, Ohio. Her music combines the driving energy of rock with touches of folk and indie, resulting in a sound that is both powerful and deeply expressive. Inspired by iconic artists such as Stevie Nicks, Maggie Rogers, Linda Ronstadt, and Bonnie Raitt, Anna crafts songs that highlight her powerful voice and storytelling abilities.</p>
         <p>Currently a junior at Belmont University, Anna is pursuing a double major in Songwriting and Media &amp; Entertainment Industries. In Nashville, she frequently performs at writers' rounds, where she captivates audiences with her authenticity and distinctive style. When back home in Columbus, she enjoys playing at local venues, delivering a mix of covers and heartfelt performances that connect with listeners.</p>
@@ -640,24 +641,25 @@ body::before {
     </div>
 
     <!-- RIGHT: Anna on the Page -->
-    <!-- RIGHT: Anna on the Page -->
-<div id="annaonthepage">
-  <h2 class="section-title">Anna on the Page</h2>
-  <p class="section-subtitle">Monthly zines</p>
-  <div class="zine-wheel" style="height: 500px; overflow-y: auto; perspective: 800px; padding: 2rem 1rem;">
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
-      <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; width: 260px;">
-        <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 1 — Jan 2026</p>
-      </a>
-      <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; width: 260px;">
-        <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 2 — Feb 2026</p>
-      </a>
-      <!-- Add more issues here -->
+    <div id="annaonthepage" style="background: rgba(20, 14, 10, 0.5); border-radius: 8px; padding: 2.5rem; border: 1px solid rgba(201, 168, 76, 0.08);">
+      <h2 class="section-title">Anna on the Page</h2>
+      <p class="section-subtitle">Monthly zines</p>
+      <div class="zine-wheel" style="overflow-x: auto; padding: 1rem 0 1.5rem;">
+        <div style="display: flex; gap: 1.5rem; min-width: min-content;">
+          <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 220px;">
+            <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 1 — Jan 2026</p>
+          </a>
+          <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 220px;">
+            <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 2 — Feb 2026</p>
+          </a>
+          <!-- Add more issues here -->
+        </div>
+      </div>
     </div>
+
   </div>
-</div>
 </section>
 
   <!-- ═══ GALLERY ═══ -->
