@@ -217,18 +217,21 @@
       align-items: start;
     }
 
-    .about-side {
-      padding-right: 1rem;
-    }
+   .about-side {
+  padding-right: 1rem;
+  display: flow-root;
+}
 
-    .about-photo {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 4px;
-      filter: brightness(0.95);
-      margin-bottom: 1.5rem;
-    }
+  .about-photo {
+  float: left;
+  width: 55%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: brightness(0.95);
+  margin: 0.4rem 1.2rem 0.6rem 0;
+  shape-outside: margin-box;
+}
 
     .about-photo-placeholder {
       width: 100%;
