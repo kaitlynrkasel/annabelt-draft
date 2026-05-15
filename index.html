@@ -10,6 +10,19 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+body::before {
+  content: '';
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  z-index: -1;
+  background: url('background.png') center/cover no-repeat;
+  filter: blur(8px);
+}
+
+    
     :root {
       --crimson: #8B1A1A;
       --deep-red: #6B0F0F;
