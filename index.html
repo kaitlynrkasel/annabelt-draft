@@ -11,9 +11,9 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 .zine-wheel {
-  overflow-x: auto;
-  padding: 1rem 2rem 1.5rem;
-  scroll-behavior: smooth;
+  overflow-x: scroll;
+  padding: 1rem 0 1.5rem;
+  -webkit-overflow-scrolling: touch;
 }
 
 .zine-wheel::-webkit-scrollbar {
@@ -29,6 +29,7 @@
   display: flex;
   gap: 2rem;
   width: max-content;
+  padding: 0 2rem;
 }
     
 body::before {
@@ -822,14 +823,12 @@ body::before {
 // ── Auto-scroll zine wheel
 const zineWheel = document.querySelector('.zine-wheel');
 if (zineWheel) {
-  let scrollSpeed = 1;
   let autoScroll = true;
   let pauseTimeout;
 
   function step() {
-    if (autoScroll && zineWheel.scrollWidth > zineWheel.clientWidth) {
-      zineWheel.scrollLeft += scrollSpeed;
-      // Loop back when we've scrolled halfway (the duplicate set)
+    if (autoScroll) {
+      zineWheel.scrollLeft += 0.5;
       if (zineWheel.scrollLeft >= zineWheel.scrollWidth / 2) {
         zineWheel.scrollLeft = 0;
       }
@@ -837,7 +836,6 @@ if (zineWheel) {
     requestAnimationFrame(step);
   }
 
-  // Pause auto-scroll when user interacts
   zineWheel.addEventListener('pointerdown', () => {
     autoScroll = false;
     clearTimeout(pauseTimeout);
@@ -847,9 +845,20 @@ if (zineWheel) {
     pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
   });
 
-  zineWheel.addEventListener('wheel', () => {
+  zineWheel.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    zineWheel.scrollLeft += e.deltaY;
     autoScroll = false;
     clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
+  });
+
+  zineWheel.addEventListener('touchstart', () => {
+    autoScroll = false;
+    clearTimeout(pauseTimeout);
+  });
+
+  zineWheel.addEventListener('touchend', () => {
     pauseTimeout = setTimeout(() => { autoScroll = true; }, 3000);
   });
 
