@@ -264,12 +264,12 @@
     }
 
     /* ── ZINE CAROUSEL ── */
-    .zine-side {
-      overflow: hidden;
-      position: relative;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    }
+  .zine-mask {
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
 
     .zine-track {
       display: flex;
@@ -279,28 +279,25 @@
       padding: 1rem 0 1.5rem;
     }
 
-    .zine-side:hover .zine-track {
-      animation-play-state: paused;
-    }
+    .zine-mask:hover .zine-track {
+  animation-play-state: paused;
+}
 
     @keyframes zine-scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
 
-   .zine-card {
+.zine-card {
   flex-shrink: 0;
-  width: 280px;          /* was 180px — wider to fit landscape */
-  text-align: center;
+  text-align: center;        /* remove width: 280px */
 }
 
 .zine-card img {
-  width: 100%;
-  aspect-ratio: 4/3;     /* match the zine's landscape ratio */
-  object-fit: contain;   /* show whole image, never crop */
-  background: var(--cream); /* fills any letterbox space cleanly */
-  border-radius: 4px;
+  height: 220px;             /* pick whatever looks right */
+  width: auto;               /* intrinsic — no letterbox */
   display: block;
+  border-radius: 4px;
   transition: transform 0.3s ease;
 }
 
@@ -695,28 +692,18 @@
       </div>
     </div>
 
-    <!-- RIGHT: Zine Carousel -->
-    <div class="zine-side">
-      <h2 class="section-title">Anna on the Page</h2>
-      <p class="section-subtitle">Monthly zine</p>
-      <div class="zine-track">
-          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
-          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
-          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
-          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
-          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
-          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
-          <!-- Duplicates for seamless loop -->
-          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
-          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
-          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
-          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
-          <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
-          <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
-      </div>
+ <!-- RIGHT: Zine Carousel -->
+<div class="zine-side">
+  <h2 class="section-title">Anna on the Page</h2>
+  <p class="section-subtitle">Monthly zine</p>
+  <div class="zine-mask">                            <!-- ADD THIS -->
+    <div class="zine-track">
+        <div class="zine-card"><img src="zine1.png" alt="January 2026"><div class="zine-label">January 2026</div></div>
+        ... (all the other zine cards stay exactly the same) ...
+        <div class="zine-card"><img src="zine2.png" alt="February 2026"><div class="zine-label">February 2026</div></div>
     </div>
-
-  </div>
+  </div>                                              <!-- ADD THIS -->
+</div>
 
   <hr class="divider">
 
