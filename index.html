@@ -12,8 +12,10 @@
 
 .zine-wheel {
   overflow-x: scroll;
+  overflow-y: hidden;
   padding: 1rem 0 1.5rem;
   -webkit-overflow-scrolling: touch;
+  margin-right: -4rem;
 }
 
 .zine-wheel::-webkit-scrollbar {
@@ -36,7 +38,7 @@ body::before {
   content: '';
   position: fixed;
   top: -20px;
-  : -20px;
+  left: -20px;
   width: calc(100% + 40px);
   height: calc(100% + 40px);
   z-index: -1;
@@ -142,7 +144,7 @@ body::before {
       content: '';
       position: absolute;
       bottom: -2px;
-      : 0;
+      left: 0;
       width: 0;
       height: 1.5px;
       background: var(--warm-gold);
