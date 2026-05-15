@@ -266,12 +266,13 @@
     /* ── ZINE CAROUSEL ── */
     .zine-side {
       overflow: hidden;
+      position: relative;
     }
 
     .zine-wheel {
-      overflow-x: auto;
+      overflow-x: scroll;
       overflow-y: hidden;
-      padding: 1rem 0 1.5rem;
+      padding: 1rem 2rem 1.5rem 2rem;
       -webkit-overflow-scrolling: touch;
       cursor: grab;
       scrollbar-width: thin;
@@ -295,11 +296,12 @@
       display: flex;
       gap: 2rem;
       width: max-content;
+      padding-right: 2rem;
     }
 
     .zine-card {
       flex-shrink: 0;
-      width: 200px;
+      width: 180px;
       text-align: center;
     }
 
