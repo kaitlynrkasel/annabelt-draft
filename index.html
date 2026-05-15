@@ -10,6 +10,17 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+#annaonthepage div::-webkit-scrollbar {
+  height: 4px;
+}
+#annaonthepage div::-webkit-scrollbar-thumb {
+  background: var(--warm-gold);
+  border-radius: 2px;
+}
+#annaonthepage a:hover img {
+  transform: scale(1.03);
+}
+    
 body::before {
   content: '';
   position: fixed;
@@ -606,6 +617,7 @@ body::before {
       </button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#annaonthepage" class="nav-link">Monthly Zine</a></li>
         <li><a href="#gallery" class="nav-link">Gallery</a></li>
         <li><a href="#appearances" class="nav-link">Appearances</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -614,21 +626,43 @@ body::before {
   </nav>
 
   <!-- ═══ ABOUT ═══ -->
-  <section id="about" class="fade-in">
-    <h2 class="section-title">About</h2>
-    <p class="section-subtitle">The story so far</p>
-    <div class="about-content">
-      <img src="aboutphoto.JPG" alt="Anna Belt" class="about-photo">
-      <!-- Replace placeholder with: <img src="headshot.png" alt="Anna Belt" class="about-photo"> -->
+<section id="about" class="fade-in" style="max-width: 1200px;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
+
+    <!-- LEFT: About -->
+    <div>
+      <h2 class="section-title">About</h2>
+      <p class="section-subtitle">The story so far</p>
+      <div style="margin-bottom: 1.5rem;">
+        <img src="headshot.png" alt="Anna Belt" class="about-photo" style="width: 60%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; float: left; margin: 0 1.5rem 1rem 0;">
+      </div>
       <div class="about-text">
-       <p>Anna Belt is a singer/songwriter based in Nashville, Tennessee, with roots in Columbus, Ohio. Her music combines the driving energy of rock with touches of folk and indie, resulting in a sound that is both powerful and deeply expressive. Inspired by iconic artists such as Stevie Nicks, Maggie Rogers, Linda Ronstadt, and Bonnie Raitt, Anna crafts songs that highlight her powerful voice and storytelling abilities.</p>
-<p>Currently a junior at Belmont University, Anna is pursuing a double major in Songwriting and Media &amp; Entertainment Industries. In Nashville, she frequently performs at writers' rounds, where she captivates audiences with her authenticity and distinctive style. When back home in Columbus, she enjoys playing at local venues, delivering a mix of covers and heartfelt performances that connect with listeners.</p>
-<p>Anna is proud to announce that her third single, "City of Angels", is out on all streaming platforms. Listen now!</p>
+        <p>Anna Belt is a singer/songwriter based in Nashville, Tennessee, with roots in Columbus, Ohio. Her music combines the driving energy of rock with touches of folk and indie, resulting in a sound that is both powerful and deeply expressive. Inspired by iconic artists such as Stevie Nicks, Maggie Rogers, Linda Ronstadt, and Bonnie Raitt, Anna crafts songs that highlight her powerful voice and storytelling abilities.</p>
+        <p>Currently a junior at Belmont University, Anna is pursuing a double major in Songwriting and Media &amp; Entertainment Industries. In Nashville, she frequently performs at writers' rounds, where she captivates audiences with her authenticity and distinctive style. When back home in Columbus, she enjoys playing at local venues, delivering a mix of covers and heartfelt performances that connect with listeners.</p>
+        <p>Anna is proud to announce that her third single, "City of Angels", is out on all streaming platforms. Listen now!</p>
       </div>
     </div>
-  </section>
 
-  <hr class="divider">
+    <!-- RIGHT: Anna on the Page -->
+    <div id="annaonthepage">
+      <h2 class="section-title">Anna on the Page</h2>
+      <p class="section-subtitle">Monthly zines</p>
+      <div style="display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x mandatory;">
+        <!-- Replace these placeholders with your actual zine covers -->
+        <a href="zines/issue1.pdf" target="_blank" style="flex: 0 0 200px; scroll-snap-align: start; text-decoration: none;">
+          <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; border: 1px solid rgba(201, 168, 76, 0.15); transition: transform 0.3s ease;">
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Issue 1 — Jan 2026</p>
+        </a>
+        <a href="zines/issue2.pdf" target="_blank" style="flex: 0 0 200px; scroll-snap-align: start; text-decoration: none;">
+          <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; border: 1px solid rgba(201, 168, 76, 0.15); transition: transform 0.3s ease;">
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; text-align: center;">Issue 2 — Feb 2026</p>
+        </a>
+        <!-- Add more issues following the same pattern -->
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- ═══ GALLERY ═══ -->
   <section id="gallery" class="fade-in">
