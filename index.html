@@ -11,22 +11,24 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 .zine-wheel {
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  scroll-snap-type: x mandatory;
+  overflow: hidden;
+  padding: 1rem 0 1.5rem;
 }
 
-.zine-wheel::-webkit-scrollbar {
-  height: 3px;
+.zine-track {
+  display: flex;
+  gap: 2rem;
+  animation: scroll-zines 15s linear infinite;
+  width: max-content;
 }
 
-.zine-wheel::-webkit-scrollbar-thumb {
-  background: var(--warm-gold);
-  border-radius: 2px;
+.zine-track:hover {
+  animation-play-state: paused;
 }
 
-.zine-card {
-  scroll-snap-align: start;
+@keyframes scroll-zines {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
     
 body::before {
@@ -629,18 +631,28 @@ body::before {
           <p>Anna is proud to announce that her third single, "City of Angels", is out on all streaming platforms. Listen now!</p>
         </div>
       </div>
-     <!-- RIGHT: Monthly Zine -->
+   <!-- RIGHT: Monthly Zine -->
       <div id="annaonthepage">
         <h2 class="section-title">Monthly Zine</h2>
         <p class="section-subtitle">Anna on the page</p>
         <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: 300; margin-bottom: 2rem; max-width: 500px;">A monthly peek behind the curtain — what I'm listening to, where I've been, what's inspiring me, and what's coming next.</p>
-        <div class="zine-wheel" style="overflow-x: auto; padding: 1rem 0 1.5rem;">
-          <div style="display: flex; gap: 2rem; min-width: min-content;">
-            <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 280px;">
+        <div class="zine-wheel">
+          <div class="zine-track">
+            <!-- Original set -->
+            <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
               <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
               <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 1 — Jan 2026</p>
             </a>
-            <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 280px;">
+            <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
+              <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 2 — Feb 2026</p>
+            </a>
+            <!-- Duplicate set for seamless loop -->
+            <a href="zines/issue1.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
+              <img src="zine1.png" alt="Issue 1" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 1 — Jan 2026</p>
+            </a>
+            <a href="zines/issue2.pdf" target="_blank" class="zine-card" style="text-decoration: none; display: block; flex: 0 0 240px;">
               <img src="zine2.png" alt="Issue 2" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 6px; border: 1px solid rgba(201, 168, 76, 0.2); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
               <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; text-align: center; letter-spacing: 0.05em;">Issue 2 — Feb 2026</p>
             </a>
