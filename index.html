@@ -31,6 +31,19 @@
       color: var(--text-light);
       line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background: url('potentialpg.jpg') center/cover no-repeat;
+      filter: blur(16px);
+      z-index: -1;
     }
 
     /* ── HERO / BANNER ── */
