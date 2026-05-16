@@ -146,7 +146,6 @@
       width: 100%;
     }
 
-    /* Mobile hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -206,7 +205,7 @@
       border-top: 1px solid rgba(201, 168, 76, 0.1);
     }
 
-    /* ── ABOUT + ZINE SPLIT ── */
+    /* ── ABOUT + GALLERY SPLIT (TOP ROW) ── */
     .about-zine-wrapper {
       max-width: 100%;
       margin: 0 auto;
@@ -266,7 +265,84 @@
       font-weight: 700;
     }
 
-    /* ── ZINE CAROUSEL ── */
+    /* ── GALLERY SIDE (auto-scrolling) ── */
+    .gallery-side {
+      min-width: 0;
+    }
+
+    .gallery-scroll {
+      max-height: 680px;
+      overflow-y: auto;
+      padding-right: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201, 168, 76, 0.4) transparent;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+
+    .gallery-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .gallery-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .gallery-scroll::-webkit-scrollbar-thumb {
+      background: rgba(201, 168, 76, 0.35);
+      border-radius: 3px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.7);
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, var(--warm-gray), var(--charcoal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(201, 168, 76, 0.08);
+      transition: border-color 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-placeholder {
+      border-color: rgba(201, 168, 76, 0.25);
+    }
+
+    /* ── ZINE + APPEARANCES (BOTTOM ROW) ── */
+    .zine-appearances-wrapper {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 3rem 4rem 5rem;
+    }
+
     .zine-side {
       min-width: 0;
     }
@@ -319,57 +395,10 @@
       letter-spacing: 0.05em;
     }
 
-    /* Appearances nested inside zine-side — reset section defaults */
     .zine-side > section {
       max-width: none;
       padding: 3rem 0 0 0;
       margin: 0;
-    }
-
-    /* ── GALLERY ── */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 4px;
-      aspect-ratio: 4/3;
-      cursor: pointer;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease, filter 0.4s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
-      filter: brightness(0.7);
-    }
-
-    .gallery-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(145deg, var(--warm-gray), var(--charcoal));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid rgba(201, 168, 76, 0.08);
-      transition: border-color 0.3s ease;
-    }
-
-    .gallery-item:hover .gallery-placeholder {
-      border-color: rgba(201, 168, 76, 0.25);
     }
 
     /* ── APPEARANCES ── */
@@ -633,6 +662,10 @@
         aspect-ratio: 16/9;
       }
 
+      .zine-appearances-wrapper {
+        padding: 2rem 2rem 4rem;
+      }
+
       .zine-card {
         width: 160px;
       }
@@ -651,7 +684,11 @@
       }
 
       .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+
+      .gallery-scroll {
+        max-height: 500px;
       }
     }
 
@@ -691,7 +728,7 @@
     </div>
   </nav>
 
-  <!-- ═══ ABOUT + ZINE ═══ -->
+  <!-- ═══ ABOUT + GALLERY (TOP ROW) ═══ -->
   <div class="about-zine-wrapper fade-in" id="about">
 
     <!-- LEFT: About -->
@@ -706,7 +743,39 @@
       </div>
     </div>
 
-    <!-- RIGHT: Zine Carousel + Appearances -->
+    <!-- RIGHT: Gallery (auto-scrolling vertical) -->
+    <div class="gallery-side" id="gallery">
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-subtitle">Moments captured</p>
+      <div class="gallery-scroll" id="gallery-scroll">
+        <div class="gallery-grid">
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 1</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 2</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 3</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 4</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 5</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 6</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 7</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 8</div></div>
+          <!-- Duplicates for seamless loop -->
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 1</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 2</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 3</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 4</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 5</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 6</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 7</div></div>
+          <div class="gallery-item"><div class="gallery-placeholder">Photo 8</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- ═══ ZINE + APPEARANCES (BOTTOM ROW) ═══ -->
+  <div class="zine-appearances-wrapper fade-in">
     <div class="zine-side">
       <h2 class="section-title">Anna on the Page</h2>
       <p class="section-subtitle">Monthly zine</p>
@@ -728,7 +797,7 @@
         </div>
       </div>
 
-      <!-- ═══ APPEARANCES (nested under zine) ═══ -->
+      <!-- ═══ APPEARANCES ═══ -->
       <section id="appearances" class="fade-in">
         <h2 class="section-title">Appearances</h2>
         <p class="section-subtitle">Upcoming shows</p>
@@ -769,24 +838,7 @@
         </div>
       </section>
     </div>
-
   </div>
-
-  <hr class="divider">
-
-  <!-- ═══ GALLERY ═══ -->
-  <section id="gallery" class="fade-in">
-    <h2 class="section-title">Gallery</h2>
-    <p class="section-subtitle">Moments captured</p>
-    <div class="gallery-grid">
-      <div class="gallery-item"><div class="gallery-placeholder">Photo 1</div></div>
-      <div class="gallery-item"><div class="gallery-placeholder">Photo 2</div></div>
-      <div class="gallery-item"><div class="gallery-placeholder">Photo 3</div></div>
-      <div class="gallery-item"><div class="gallery-placeholder">Photo 4</div></div>
-      <div class="gallery-item"><div class="gallery-placeholder">Photo 5</div></div>
-      <div class="gallery-item"><div class="gallery-placeholder">Photo 6</div></div>
-    </div>
-  </section>
 
   <hr class="divider">
 
@@ -840,7 +892,6 @@
       navLinks.classList.toggle('open');
     });
 
-    // ── Close menu on link click
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -848,7 +899,7 @@
     });
 
     // ── Active nav highlight on scroll
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll('[id="about"], [id="gallery"], [id="appearances"], [id="contact"]');
     const navItems = document.querySelectorAll('.nav-link');
 
     const observerOptions = { rootMargin: '-30% 0px -70% 0px' };
@@ -884,6 +935,42 @@
       });
     });
     lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+
+    // ── Gallery vertical auto-scroll (pauses on user interaction, resumes after 2s)
+    (function () {
+      const el = document.getElementById('gallery-scroll');
+      if (!el) return;
+
+      let userPaused = false;
+      let resumeTimer = null;
+      let ignoreNextScroll = false;
+
+      function pauseForUser() {
+        userPaused = true;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => { userPaused = false; }, 2000);
+      }
+
+      el.addEventListener('wheel', pauseForUser, { passive: true });
+      el.addEventListener('touchstart', pauseForUser, { passive: true });
+      el.addEventListener('mousedown', pauseForUser);
+      el.addEventListener('scroll', () => {
+        if (ignoreNextScroll) { ignoreNextScroll = false; return; }
+        // user-initiated scroll (wheel/touch/drag also fire scroll, but we already paused above)
+      }, { passive: true });
+
+      setInterval(() => {
+        if (userPaused) return;
+        const half = el.scrollHeight / 2;
+        if (el.scrollTop >= half) {
+          ignoreNextScroll = true;
+          el.scrollTop = el.scrollTop - half;
+        } else {
+          ignoreNextScroll = true;
+          el.scrollTop += 1;
+        }
+      }, 40);
+    })();
   </script>
 
 </body>
