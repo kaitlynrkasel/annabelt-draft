@@ -629,10 +629,8 @@
       border-radius: 4px;
     }
 
-    /* ── RESPONSIVE ── */
-
-    
-       @media (max-width: 768px) {
+    /* ── RESPONSIVE (PHONE ONLY — ≤768px) ── */
+    @media (max-width: 768px) {
       .hamburger {
         display: flex;
       }
@@ -705,63 +703,6 @@
 
       .contact-grid {
         grid-template-columns: 1fr;
-      }
-    }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background: rgba(13, 13, 13, 0.97);
-        padding: 1.5rem 2rem;
-        gap: 1.2rem;
-        border-bottom: 1px solid rgba(201, 168, 76, 0.1);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .about-zine-wrapper {
-        grid-template-columns: 1fr;
-        padding: 3rem 2rem;
-        gap: 2rem;
-      }
-
-      .about-photo-placeholder {
-        aspect-ratio: 16/9;
-      }
-
-      .zine-appearances-wrapper {
-        padding: 2rem 2rem 4rem;
-      }
-
-      .zine-card {
-        width: 160px;
-      }
-
-      .appearance-item {
-        grid-template-columns: 80px 1fr;
-        gap: 1rem;
-      }
-
-      .btn-tickets {
-        display: none;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      }
-
-      .gallery-scroll {
-        max-height: 500px;
       }
     }
 
@@ -1027,10 +968,6 @@
       el.addEventListener('wheel', pauseForUser, { passive: true });
       el.addEventListener('touchstart', pauseForUser, { passive: true });
       el.addEventListener('mousedown', pauseForUser);
-      el.addEventListener('scroll', () => {
-        if (ignoreNextScroll) { ignoreNextScroll = false; return; }
-        // user-initiated scroll (wheel/touch/drag also fire scroll, but we already paused above)
-      }, { passive: true });
 
       setInterval(() => {
         if (userPaused) return;
